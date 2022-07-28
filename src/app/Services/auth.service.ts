@@ -28,6 +28,12 @@ export class AuthService {
         this.router.navigate(['/bestPractices']);
       });
   }
+
+  logout() {
+    this.cookieService.eraseCookie('_token');
+    this.router.navigate(['/login']);
+  }
+
   isLoggedIn() {
     return this.cookieService.readCookie('_token') !== null;
   }

@@ -1,0 +1,8 @@
+.logout-btn{
+  cursor: pointer;
+}
+.logout-btn:hover{
+  color: #fff;
+  background-color: #0069d9;
+  border-radius: 5px;
+}
