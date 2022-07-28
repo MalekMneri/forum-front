@@ -1,3 +1,5 @@
+import { EventsService } from './../Services/events.service';
+import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Event } from '../Models/Event';
 
@@ -7,6 +9,7 @@ import { Event } from '../Models/Event';
   styleUrls: ['./events.component.css'],
 })
 export class EventsComponent implements OnInit {
+  searchTerm = '';
   events: Event[] = [
     {
       idEvent: 1,
@@ -39,7 +42,26 @@ export class EventsComponent implements OnInit {
       user: 1,
     },
   ];
-  constructor() {}
+  constructor(private eventService: EventsService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // this.eventService.getEvents().subscribe((data) => {
+    //   this.events = data;
+    // }
+    // );
+  }
+  addEvent(event: any, eventForm: NgForm) {
+    event.preventDefault();
+    eventForm.value.user = 1;
+    console.log(eventForm.value);
+    this.eventService.addEvent(eventForm.value).subscribe((data) => {
+      this.events.push(data);
+    });
+  }
+  search() {
+    console.log(this.searchTerm);
+    this.eventService.search(this.searchTerm).subscribe((data) => {
+      this.events = data;
+    });
+  }
 }

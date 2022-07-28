@@ -9,6 +9,9 @@ export class EventsService {
   getEvents() {
     return this.http.get<any>('/api/events');
   }
+  search(seachTerm: string) {
+    return this.http.get<any>('/searche/' + seachTerm);
+  }
   addEvent(event: Event) {
     return this.http.post<any>('/adde', event);
   }
