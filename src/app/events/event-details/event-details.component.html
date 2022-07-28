@@ -33,5 +33,14 @@
         </div>
       </div>
     </div>
+    <form method="post" #commentForm="ngForm">
+      <div class="form-group flex-row">
+        <div class="">
+          <input class="form-control" id="comment" name="comment" placeholder="Coment" ngModel required>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2" (click)="addComment(commentForm)">Submit</button>
+
+      </div>
+    </form>
   </div>
 </div>

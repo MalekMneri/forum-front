@@ -19,19 +19,4 @@
       </div>
     </div>
   </div>
-  <h5 class="ml-3">Comments:</h5>
-  <div class="ml-5">
-    <div class="card mb-2" *ngFor="let comment of commentaires">
-      <div class="card-body p-2 ml-2">
-        <div class="row">
-          <span class="ml-3">{{comment.commentateur}} <small class="text-muted ml-2">{{comment.dateCreation |date: "medium"}}</small>
-          </span>
-          <div class="ml-auto mr-4"> <i class="fa fa-heart" aria-hidden="true"></i> {{comment.nbrlikes}}</div>
-        </div>
-        <div class="font-size-sm">
-          {{comment.comment}}
-        </div>
-      </div>
-    </div>
-  </div>
 </div>

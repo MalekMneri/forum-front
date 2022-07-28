@@ -1,3 +1,5 @@
+import { NgForm } from '@angular/forms';
+import { CommentsService } from './../../Services/comments.service';
 import { Component, OnInit } from '@angular/core';
 import { Commentaire } from 'src/app/Models/Commentaire';
 import { Event } from 'src/app/Models/Event';
@@ -47,7 +49,20 @@ export class EventDetailsComponent implements OnInit {
     pieceJointe: '',
     user: 1,
   };
-  constructor() {}
+  constructor(private commentService: CommentsService) {}
 
   ngOnInit(): void {}
+
+  addComment(commentForm: NgForm) {
+    commentForm.value.event = this.event.idEvent;
+    commentForm.value.commentateur = 'Commentateur 1';
+    commentForm.value.dateCreation = new Date();
+    commentForm.value.nbrlikes = 0;
+    commentForm.value.useful = false;
+    console.log(commentForm.value);
+    this.commentService.addComment(commentForm.value).subscribe(() => {
+      this.commentaires.push(commentForm.value);
+      commentForm.reset();
+    });
+  }
 }
