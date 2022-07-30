@@ -17,7 +17,7 @@ export class JwtInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     // add token to header
-    const token = this.cookies.readCookie('_token');
+    const token = localStorage.getItem('token');
     if (token) {
       request = request.clone({
         setHeaders: {

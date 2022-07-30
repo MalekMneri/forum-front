@@ -4,7 +4,10 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class EventsService {
-  constructor(private http: HttpClient) {}
+  apiRoute: string;
+  constructor(private http: HttpClient) {
+    this.apiRoute = 'http://localhost:8081/';
+  }
 
   getEvents() {
     return this.http.get<any>('/api/events');
@@ -13,6 +16,6 @@ export class EventsService {
     return this.http.get<any>('/searche/' + seachTerm);
   }
   addEvent(event: Event) {
-    return this.http.post<any>('/adde', event);
+    return this.http.post<any>(this.apiRoute + 'adde', event);
   }
 }

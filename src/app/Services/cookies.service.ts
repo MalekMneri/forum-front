@@ -55,9 +55,10 @@ export class CookiesService {
     return JSON.parse(jsonPayload);
   }
   createMemberCookies(data: any) {
-    this.createCookie('_token', data.id_token, data.exp);
+    console.log(data, data);
+    this.createCookie('_token', data.token, data.exp);
     let _token_data = this.parseJWT();
-
+    console.log(_token_data);
     this.createCookie('_token', data.id_token, _token_data.exp);
   }
   getUserId() {

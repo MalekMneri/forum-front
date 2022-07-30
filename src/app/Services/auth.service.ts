@@ -7,22 +7,28 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
+  authRoute: string;
   constructor(
     private http: HttpClient,
     private cookieService: CookiesService,
     private router: Router
-  ) {}
+  ) {
+    this.authRoute = 'http://localhost:8081/';
+  }
   login(credentials: any) {
     return this.http
-      .post('http://localhost:8080/login', credentials)
+      .post(this.authRoute + 'authenticate', credentials)
       .subscribe((data: any) => {
+        console.log(data.user);
+        localStorage.setItem('user', JSON.stringify(data.user));
+        localStorage.setItem('token', data.token);
         this.cookieService.createMemberCookies(data);
         this.router.navigate(['/bestPractices']);
       });
   }
   register(credentials: any) {
     return this.http
-      .post('http://localhost:8080/register', credentials)
+      .post('http://localhost:8081/register', credentials)
       .subscribe((data: any) => {
         this.cookieService.createMemberCookies(data);
         this.router.navigate(['/bestPractices']);
@@ -30,7 +36,7 @@ export class AuthService {
   }
 
   logout() {
-    this.cookieService.eraseCookie('_token');
+    localStorage.clear();
     this.router.navigate(['/login']);
   }
 
