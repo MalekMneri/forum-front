@@ -11,7 +11,7 @@ import { Event } from '../Models/Event';
 export class EventsComponent implements OnInit {
   searchTerm = '';
   events: Event[] = [
-    {
+/*    {
       idEvent: 1,
       titre: 'Event 1',
       description: 'Description 1',
@@ -40,22 +40,24 @@ export class EventsComponent implements OnInit {
       Solved: true,
       pieceJointe: '',
       user: 1,
-    },
+    },*/
   ];
   constructor(private eventService: EventsService) {}
 
   ngOnInit(): void {
-    // this.eventService.getEvents().subscribe((data) => {
-    //   this.events = data;
-    // }
-    // );
+    this.eventService.getEvents().subscribe((data) => {
+      console.log(data);
+      this.events = data;
+     }
+     );
   }
   addEvent(event: any, eventForm: NgForm) {
     event.preventDefault();
     eventForm.value.user = 1;
     console.log(eventForm.value);
     this.eventService.addEvent(eventForm.value).subscribe((data) => {
-      this.events.push(data);
+      //this.events.push(data);
+      console.log(data);
     });
   }
   search() {

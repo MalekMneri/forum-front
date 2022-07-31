@@ -10,12 +10,17 @@ export class EventsService {
   }
 
   getEvents() {
-    return this.http.get<any>('/api/events');
+    return this.http.get<any>(this.apiRoute+'events');
   }
   search(seachTerm: string) {
     return this.http.get<any>('/searche/' + seachTerm);
   }
   addEvent(event: Event) {
+    console.log(event);
     return this.http.post<any>(this.apiRoute + 'adde', event);
+  }
+
+  getEvent(id: string) {
+    return this.http.get<any>(this.apiRoute + 'event/' + id);
   }
 }

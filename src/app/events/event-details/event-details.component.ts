@@ -3,6 +3,8 @@ import { CommentsService } from './../../Services/comments.service';
 import { Component, OnInit } from '@angular/core';
 import { Commentaire } from 'src/app/Models/Commentaire';
 import { Event } from 'src/app/Models/Event';
+import { EventsService } from '../../Services/events.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-event-details',
@@ -49,9 +51,17 @@ export class EventDetailsComponent implements OnInit {
     pieceJointe: '',
     user: 1,
   };
-  constructor(private commentService: CommentsService) {}
+  constructor(private route: ActivatedRoute, private commentService: CommentsService, private eventsService: EventsService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let id = this.route.snapshot.paramMap.get("id") || "0";
+    this.eventsService.getEvent(id).subscribe(
+      (data) => {
+        console.log(data);
+        this.event = data;
+      }
+    );
+  }
 
   addComment(commentForm: NgForm) {
     commentForm.value.event = this.event.idEvent;
