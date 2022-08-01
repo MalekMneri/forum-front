@@ -1,3 +1,4 @@
+import { NgForm } from '@angular/forms';
 import { BestpracticeService } from './../Services/bestpractice.service';
 import { BestPractice } from './../Models/BestPractice';
 import { Component, OnInit } from '@angular/core';
@@ -9,44 +10,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BestpracticesComponent implements OnInit {
   searchTerm = '';
-  bestPractices: BestPractice[] = [
-    {
-      idBP: 1,
-      titre: 'Best Practice 1',
-      description: 'Description 1',
-      dateCreation: new Date(),
-      pieceJointe: '',
-      valid: true,
-    },
-    {
-      idBP: 2,
-      titre: 'Best Practice 2',
-      description: 'Description 2',
-      dateCreation: new Date(),
-      pieceJointe: '',
-      valid: false,
-    },
-    {
-      idBP: 3,
-      titre: 'Best Practice 3',
-      description: 'Description 3',
-      dateCreation: new Date(),
-      pieceJointe: '',
-      valid: true,
-    },
-  ];
+  bestPractices: BestPractice[] = [];
   constructor(private bpService: BestpracticeService) {}
 
   ngOnInit(): void {
-    // this.bpService.getBestPractices().subscribe((data) => {
-    //   this.bestPractices = data;
-    // }
-    // );
+    this.getBestPractices();
+  }
+  getBestPractices() {
+    this.bpService.getBestPractices().subscribe((data) => {
+      this.bestPractices = data;
+    });
   }
 
   search() {
     this.bpService.searchBP(this.searchTerm).subscribe((data) => {
+      console.log(data);
       this.bestPractices = data;
+    });
+  }
+  addBestPractice(event: any, bForm: NgForm) {
+    event.preventDefault();
+    console.log(bForm.value);
+    this.bpService.addBestPractice(bForm.value).subscribe((data) => {
+      console.log(data);
+      this.getBestPractices();
+      bForm.reset();
     });
   }
 }

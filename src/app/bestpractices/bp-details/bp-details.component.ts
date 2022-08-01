@@ -1,3 +1,5 @@
+import { BestpracticeService } from './../../Services/bestpractice.service';
+import { ActivatedRoute } from '@angular/router';
 import { Commentaire } from './../../Models/Commentaire';
 import { BestPractice } from './../../Models/BestPractice';
 import { Component, OnInit } from '@angular/core';
@@ -8,43 +10,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bp-details.component.css'],
 })
 export class BpDetailsComponent implements OnInit {
-  constructor() {}
+  constructor(
+    private route: ActivatedRoute,
+    private serviceBP: BestpracticeService
+  ) {}
   bp: BestPractice = {
-    idBP: 1,
-    titre: 'Best Practice 1',
-    description: 'Description 1',
+    idBP: 0,
+    titre: 'No best practice found',
+    description: '',
     dateCreation: new Date(),
     pieceJointe: '',
     valid: true,
   };
-  commentaires: Commentaire[] = [
-    {
-      idCom: 1,
-      commentateur: 'Commentateur 1',
-      comment: 'Comment 1',
-      dateCreation: new Date(),
-      nbrlikes: 12,
-      useful: true,
-      event: 1,
-    },
-    {
-      idCom: 2,
-      commentateur: 'Commentateur 2',
-      comment: 'Comment 2',
-      dateCreation: new Date(),
-      nbrlikes: 5,
-      useful: false,
-      event: 1,
-    },
-    {
-      idCom: 3,
-      commentateur: 'Commentateur 3',
-      comment: 'Comment 3',
-      dateCreation: new Date(),
-      nbrlikes: 3,
-      useful: true,
-      event: 1,
-    },
-  ];
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id') || '0';
+    this.serviceBP.getBestPracticeById(id).subscribe((data) => {
+      this.bp = data;
+    });
+  }
 }

@@ -6,14 +6,21 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class BestpracticeService {
+  apiRoute = 'http://localhost:8081/';
   constructor(private http: HttpClient) {}
 
   getBestPractices() {
-    return this.http.get<BestPractice[]>('http://localhost:8080/bestpractices');
+    return this.http.get<BestPractice[]>(this.apiRoute + 'bestpractices');
   }
   searchBP(searchTerm: string) {
     return this.http.get<BestPractice[]>(
-      `http://localhost:8080/searchbp/${searchTerm}`
+      this.apiRoute + `searchb/${searchTerm}`
     );
+  }
+  addBestPractice(bp: BestPractice) {
+    return this.http.post(this.apiRoute + 'addbp', bp);
+  }
+  getBestPracticeById(idBP: string) {
+    return this.http.get<BestPractice>(this.apiRoute + `bestpractice/${idBP}`);
   }
 }
