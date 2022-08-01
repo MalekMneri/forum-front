@@ -10,10 +10,10 @@ export class EventsService {
   }
 
   getEvents() {
-    return this.http.get<any>(this.apiRoute+'events');
+    return this.http.get<any>(this.apiRoute + 'events');
   }
   search(seachTerm: string) {
-    return this.http.get<any>('/searche/' + seachTerm);
+    return this.http.get<any>(this.apiRoute + 'searche/' + seachTerm);
   }
   addEvent(event: Event) {
     console.log(event);
