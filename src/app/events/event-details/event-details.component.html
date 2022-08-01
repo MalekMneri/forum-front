@@ -29,14 +29,14 @@
           <div class="ml-auto mr-4"> <i class="fa fa-heart" aria-hidden="true"></i> {{comment.nbrlikes}}</div>
         </div>
         <div class="font-size-sm">
-          {{comment.comment}}
+          {{comment.commentaire}}
         </div>
       </div>
     </div>
     <form method="post" #commentForm="ngForm">
       <div class="form-group flex-row">
         <div class="">
-          <input class="form-control" id="comment" name="comment" placeholder="Coment" ngModel required>
+          <input class="form-control" id="commentaire" name="commentaire" placeholder="Coment" ngModel required>
         </div>
         <button type="submit" class="btn btn-primary mt-2" (click)="addComment(commentForm)">Submit</button>
 

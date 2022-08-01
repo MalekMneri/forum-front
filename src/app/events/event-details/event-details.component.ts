@@ -12,55 +12,37 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./event-details.component.css'],
 })
 export class EventDetailsComponent implements OnInit {
-  commentaires: Commentaire[] = [
-    {
-      idCom: 1,
-      commentateur: 'Commentateur 1',
-      comment: 'Comment 1',
-      dateCreation: new Date(),
-      nbrlikes: 12,
-      useful: true,
-      event: 1,
-    },
-    {
-      idCom: 2,
-      commentateur: 'Commentateur 2',
-      comment: 'Comment 2',
-      dateCreation: new Date(),
-      nbrlikes: 5,
-      useful: false,
-      event: 1,
-    },
-    {
-      idCom: 3,
-      commentateur: 'Commentateur 3',
-      comment: 'Comment 3',
-      dateCreation: new Date(),
-      nbrlikes: 3,
-      useful: true,
-      event: 1,
-    },
-  ];
+  commentaires: Commentaire[] = [];
   event: Event = {
-    idEvent: 1,
-    titre: 'Event 1',
-    description: 'Description 1',
+    idEvent: 0,
+    titre: '',
+    description: '',
     dateCreation: new Date(),
     dateCloture: new Date(),
     Solved: true,
     pieceJointe: '',
-    user: 1,
+    user: 0,
   };
-  constructor(private route: ActivatedRoute, private commentService: CommentsService, private eventsService: EventsService) { }
+  idEvent = '0';
+  constructor(
+    private route: ActivatedRoute,
+    private commentService: CommentsService,
+    private eventsService: EventsService
+  ) {}
 
   ngOnInit(): void {
-    let id = this.route.snapshot.paramMap.get("id") || "0";
-    this.eventsService.getEvent(id).subscribe(
-      (data) => {
-        console.log(data);
-        this.event = data;
-      }
-    );
+    this.idEvent = this.route.snapshot.paramMap.get('id') || '0';
+    this.eventsService.getEvent(this.idEvent).subscribe((data) => {
+      console.log(data);
+      this.event = data;
+    });
+    this.getComments(this.idEvent);
+  }
+  getComments(id: string) {
+    this.commentService.getCommentsByEvent(id).subscribe((data: any) => {
+      console.log(data);
+      this.commentaires = data;
+    });
   }
 
   addComment(commentForm: NgForm) {
@@ -70,9 +52,12 @@ export class EventDetailsComponent implements OnInit {
     commentForm.value.nbrlikes = 0;
     commentForm.value.useful = false;
     console.log(commentForm.value);
-    this.commentService.addComment(commentForm.value).subscribe(() => {
-      this.commentaires.push(commentForm.value);
-      commentForm.reset();
-    });
+
+    this.commentService
+      .addComment(commentForm.value, this.idEvent)
+      .subscribe(() => {
+        this.getComments(this.idEvent);
+        commentForm.reset();
+      });
   }
 }

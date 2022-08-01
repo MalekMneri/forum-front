@@ -5,8 +5,12 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class CommentsService {
+  apiRoute = 'http://localhost:8081/';
   constructor(private http: HttpClient) {}
-  addComment(comment: any) {
-    return this.http.post('http://localhost:8080/addc', comment);
+  addComment(comment: any, idEvent: string) {
+    return this.http.post(this.apiRoute + 'addc/' + idEvent, comment);
+  }
+  getCommentsByEvent(idEvent: string) {
+    return this.http.get(this.apiRoute + 'commentaires/' + idEvent);
   }
 }
