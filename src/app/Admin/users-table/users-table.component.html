@@ -1,0 +1,29 @@
+<div class="container">
+  <br>
+  <h3>Gestion des utilisateurs</h3>
+  <br>
+  <br>
+  <table class="table table-striped table-light">
+    <thead>
+      <th>Nom complet</th>
+      <th>CIN</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Vérifié </th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{user.fullName ?? '--' }}</td>
+        <td>{{user.cinUser ?? '--'}} </td>
+        <td>{{user.username}}</td>
+        <td>{{user.emailUser}}</td>
+        <td>{{user.role}}</td>
+        <td> <em class="fa fa-check text-success" *ngIf="user.verified"></em>
+          <a (click)="validateUser(user.idUser)" *ngIf="!user.verified">vérifier</a>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>

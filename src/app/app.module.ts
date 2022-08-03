@@ -12,6 +12,14 @@ import { BpDetailsComponent } from './bestpractices/bp-details/bp-details.compon
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
+import { UsersTableComponent } from './Admin/users-table/users-table.component';
+import { EventsTableComponent } from './Admin/events-table/events-table.component';
+import { SidebarComponent } from './Admin/sidebar/sidebar.component';
+import { DashboardComponent } from './Admin/dashboard/dashboard.component';
+import { AddEventComponent } from './Admin/events-table/add-event/add-event.component';
+import { EditEventComponent } from './Admin/events-table/edit-event/edit-event.component';
+import { BestpracticesTableComponent } from './Admin/bestpractices-table/bestpractices-table.component';
+import { AddBestpracticeComponent } from './Admin/bestpractices-table/add-bestpractice/add-bestpractice.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +31,14 @@ import { HeaderComponent } from './header/header.component';
     BestpracticesComponent,
     BpDetailsComponent,
     HeaderComponent,
+    UsersTableComponent,
+    EventsTableComponent,
+    SidebarComponent,
+    DashboardComponent,
+    AddEventComponent,
+    EditEventComponent,
+    BestpracticesTableComponent,
+    AddBestpracticeComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

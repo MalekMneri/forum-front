@@ -23,7 +23,8 @@ export class BestpracticesComponent implements OnInit {
   }
 
   search() {
-    this.bpService.searchBP(this.searchTerm).subscribe((data) => {
+    if (this.searchTerm.length === 0) this.getBestPractices();
+    this.bpService.search(this.searchTerm).subscribe((data: any) => {
       console.log(data);
       this.bestPractices = data;
     });

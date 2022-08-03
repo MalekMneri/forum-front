@@ -23,4 +23,10 @@ export class EventsService {
   getEvent(id: string) {
     return this.http.get<any>(this.apiRoute + 'event/' + id);
   }
+  deleteEvent(id: string) {
+    return this.http.delete<any>(this.apiRoute + 'deletee/' + id);
+  }
+  editEvent(event: Event, id: string) {
+    return this.http.put<any>(this.apiRoute + 'edite/' + id, event);
+  }
 }

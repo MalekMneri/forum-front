@@ -12,7 +12,7 @@ export class BestpracticeService {
   getBestPractices() {
     return this.http.get<BestPractice[]>(this.apiRoute + 'bestpractices');
   }
-  searchBP(searchTerm: string) {
+  search(searchTerm: string) {
     return this.http.get<BestPractice[]>(
       this.apiRoute + `searchb/${searchTerm}`
     );
@@ -22,5 +22,8 @@ export class BestpracticeService {
   }
   getBestPracticeById(idBP: string) {
     return this.http.get<BestPractice>(this.apiRoute + `bestpractice/${idBP}`);
+  }
+  delete(idBP: string) {
+    return this.http.delete(this.apiRoute + `deleteb/${idBP}`);
   }
 }
