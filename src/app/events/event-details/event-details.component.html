@@ -26,7 +26,7 @@
         <div class="row">
           <span class="ml-3">{{comment.commentateur}} <small class="text-muted ml-2">{{comment.dateCreation |date: "medium"}}</small>
           </span>
-          <div class="ml-auto mr-4"> <i class="fa fa-heart" aria-hidden="true"></i> {{comment.nbrlikes}}</div>
+          <div class="ml-auto mr-4"> <i class="fa {{'fa-heart'}}" aria-hidden="true" (click)="likeComment(comment)"></i> {{comment.likes?.length}}</div>
         </div>
         <div class="font-size-sm">
           {{comment.commentaire}}
@@ -35,11 +35,8 @@
     </div>
     <form method="post" #commentForm="ngForm">
       <div class="form-group flex-row">
-        <div class="">
-          <input class="form-control" id="commentaire" name="commentaire" placeholder="Coment" ngModel required>
-        </div>
+        <input class="form-control" id="commentaire" name="commentaire" placeholder="Comment" ngModel required>
         <button type="submit" class="btn btn-primary mt-2" (click)="addComment(commentForm)">Submit</button>
-
       </div>
     </form>
   </div>

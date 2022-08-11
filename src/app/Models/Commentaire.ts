@@ -6,4 +6,5 @@ export class Commentaire {
   nbrlikes: number | undefined;
   useful: boolean | undefined;
   event: number | undefined;
+  likes: any[] | undefined;
 }

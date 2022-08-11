@@ -24,6 +24,7 @@ export class EventDetailsComponent implements OnInit {
     user: 0,
   };
   idEvent = '0';
+  likedComments: number[] = [];
   constructor(
     private route: ActivatedRoute,
     private commentService: CommentsService,
@@ -31,6 +32,9 @@ export class EventDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.likedComments = JSON.parse(
+      localStorage.getItem('likedComments') || '[]'
+    );
     this.idEvent = this.route.snapshot.paramMap.get('id') || '0';
     this.eventsService.getEvent(this.idEvent).subscribe((data) => {
       console.log(data);
@@ -59,5 +63,13 @@ export class EventDetailsComponent implements OnInit {
         this.getComments(this.idEvent);
         commentForm.reset();
       });
+  }
+
+  likeComment(comment: Commentaire) {
+    this.commentService.likeComment(comment).subscribe((data: any) => {
+      this.getComments(this.idEvent);
+      this.likedComments.push(comment.idCom ?? 0);
+      localStorage.setItem('likedComments', JSON.stringify(this.likedComments));
+    });
   }
 }

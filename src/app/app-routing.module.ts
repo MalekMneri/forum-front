@@ -1,3 +1,8 @@
+import { DocumentationDetailsComponent } from './documentations/documentation-details/documentation-details.component';
+import { DocumentationsComponent } from './documentations/documentations.component';
+import { AddDocumentationComponent } from './Admin/documentations-table/add-documentation/add-documentation.component';
+import { DocumentationsTableComponent } from './Admin/documentations-table/documentations-table.component';
+import { AddBestpracticeComponent } from './Admin/bestpractices-table/add-bestpractice/add-bestpractice.component';
 import { BestpracticesTableComponent } from './Admin/bestpractices-table/bestpractices-table.component';
 import { EditEventComponent } from './Admin/events-table/edit-event/edit-event.component';
 import { AddEventComponent } from './Admin/events-table/add-event/add-event.component';
@@ -30,7 +35,14 @@ const routes: Routes = [
         path: 'bestPractices',
         children: [
           { path: '', component: BestpracticesTableComponent },
-          { path: 'add', component: BpDetailsComponent },
+          { path: 'add', component: AddBestpracticeComponent },
+        ],
+      },
+      {
+        path: 'documentations',
+        children: [
+          { path: '', component: DocumentationsTableComponent },
+          { path: 'add', component: AddDocumentationComponent },
         ],
       },
       { path: 'users', component: UsersTableComponent },
@@ -48,6 +60,13 @@ const routes: Routes = [
     children: [
       { path: '', component: BestpracticesComponent },
       { path: ':id', component: BpDetailsComponent },
+    ],
+  },
+  {
+    path: 'documentations',
+    children: [
+      { path: '', component: DocumentationsComponent },
+      { path: ':id', component: DocumentationDetailsComponent },
     ],
   },
 

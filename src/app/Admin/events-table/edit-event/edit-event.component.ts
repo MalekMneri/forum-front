@@ -14,18 +14,38 @@ export class EditEventComponent implements OnInit {
     private route: ActivatedRoute,
     private eventsService: EventsService
   ) {}
-  event: any;
+  event = {
+    idEvent: '',
+    titre: '',
+    description: '',
+    dateCreation: '',
+    dateCloture: '',
+    pieceJointe: 'none',
+  };
   ngOnInit(): void {
     let id = this.route.snapshot.paramMap.get('id') || '';
     this.eventsService.getEvent(id).subscribe((data) => {
+      console.log(data);
+      // format dates to yyyy-MM-dd
       this.event = data;
+      this.event.dateCreation = new Date(data.dateCreation)
+        .toISOString()
+        .split('T')[0];
+      this.event.dateCloture = new Date(data.dateCloture)
+        .toISOString()
+        .split('T')[0];
     });
   }
   editEvent(event: any, form: NgForm) {
-    if (form.invalid) return;
+    form.value.pieceJointe = 'none';
+    console.log(form.value);
+    if (form.invalid) {
+      console.log('invalid');
+      return;
+    }
     let id = this.route.snapshot.paramMap.get('id') || '';
 
-    this.eventsService.editEvent(event, id).subscribe((data) => {
+    this.eventsService.editEvent(form.value, id).subscribe((data) => {
       this.router.navigate(['/dashboard/events']);
     });
   }

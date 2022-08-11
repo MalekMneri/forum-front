@@ -20,6 +20,10 @@ import { AddEventComponent } from './Admin/events-table/add-event/add-event.comp
 import { EditEventComponent } from './Admin/events-table/edit-event/edit-event.component';
 import { BestpracticesTableComponent } from './Admin/bestpractices-table/bestpractices-table.component';
 import { AddBestpracticeComponent } from './Admin/bestpractices-table/add-bestpractice/add-bestpractice.component';
+import { DocumentationsTableComponent } from './Admin/documentations-table/documentations-table.component';
+import { AddDocumentationComponent } from './Admin/documentations-table/add-documentation/add-documentation.component';
+import { DocumentationsComponent } from './documentations/documentations.component';
+import { DocumentationDetailsComponent } from './documentations/documentation-details/documentation-details.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +43,10 @@ import { AddBestpracticeComponent } from './Admin/bestpractices-table/add-bestpr
     EditEventComponent,
     BestpracticesTableComponent,
     AddBestpracticeComponent,
+    DocumentationsTableComponent,
+    AddDocumentationComponent,
+    DocumentationsComponent,
+    DocumentationDetailsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
