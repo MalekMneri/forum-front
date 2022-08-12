@@ -20,6 +20,6 @@ export class DocumentationsService {
     return this.http.delete(this.apiRoute + 'deleted/' + id);
   }
   addDocumentation(documentation: any) {
-    return this.http.post(this.apiRoute + 'addd', documentation);
+    return this.http.post(this.apiRoute + 'upload', documentation);
   }
 }
