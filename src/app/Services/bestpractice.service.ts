@@ -26,4 +26,7 @@ export class BestpracticeService {
   delete(idBP: string) {
     return this.http.delete(this.apiRoute + `deleteb/${idBP}`);
   }
+  resolveBP(idBP: string) {
+    return this.http.put(this.apiRoute + `validatebp/${idBP}`, null);
+  }
 }

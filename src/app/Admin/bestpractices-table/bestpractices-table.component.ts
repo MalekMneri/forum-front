@@ -33,4 +33,11 @@ export class BestpracticesTableComponent implements OnInit {
       this.bestPractices = data;
     });
   }
+  resolveBP(bp: any) {
+    if (!bp.valid) {
+      this.bpService.resolveBP(bp.idBP.toString()).subscribe((data) => {
+        this.getbp();
+      });
+    }
+  }
 }

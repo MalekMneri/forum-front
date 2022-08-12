@@ -23,7 +23,7 @@
         <td>{{bp.description}}</td>
         <td>{{bp.dateCreation | date}}</td>
         <td>{{bp.dateCloture | date}}</td>
-        <td> <em class="fa {{ bp.solved ? 'fa-check text-success':'fa-xmark text-danger' }}"></em> </td>
+        <td> <em (click)="resolveBP(bp)" class="fa {{ bp.valid ? 'fa-check text-success':'fa-xmark text-danger' }}"></em> </td>
         <td> <em class="fa fa-edit mr-4 action-button"></em> <em class="fa fa-trash action-button" (click)="deletebp(bp.idbp)"></em> </td>
       </tr>
     </tbody>
