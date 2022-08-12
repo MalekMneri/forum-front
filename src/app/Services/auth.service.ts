@@ -24,9 +24,11 @@ export class AuthService {
       });
   }
   register(credentials: any) {
+    console.log(credentials);
     return this.http
-      .post('http://localhost:8081/register', credentials)
+      .post('http://localhost:8081/add-user', credentials)
       .subscribe((data: any) => {
+        console.log(data);
         this.router.navigate(['/login']);
       });
   }
