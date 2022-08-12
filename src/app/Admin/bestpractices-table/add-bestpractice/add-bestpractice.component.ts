@@ -25,6 +25,11 @@ export class AddBestpracticeComponent implements OnInit {
     });
   }
   addbp(event: any, form: NgForm) {
-    console.log(form.value);
+    event.preventDefault();
+    form.value.valid = false;
+    this.bpService.addBestPractice(form.value).subscribe((data) => {
+      console.log(data);
+      this.router.navigate(['/dashboard/bestPractices']);
+    });
   }
 }

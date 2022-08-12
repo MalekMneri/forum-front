@@ -29,4 +29,7 @@ export class BestpracticeService {
   resolveBP(idBP: string) {
     return this.http.put(this.apiRoute + `validatebp/${idBP}`, null);
   }
+  edit(bp: BestPractice, idBP: string) {
+    return this.http.put(this.apiRoute + 'editb/' + idBP, bp);
+  }
 }

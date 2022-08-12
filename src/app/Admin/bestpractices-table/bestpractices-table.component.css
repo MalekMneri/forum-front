@@ -1,0 +1,14 @@
+.action-button:hover {
+  color: #ff960c;
+}
+
+.action-button {
+  cursor: pointer;
+}
+
+.validate-btn{
+  cursor: pointer;
+}
+.validate-btn:hover{
+  text-decoration: underline;
+}

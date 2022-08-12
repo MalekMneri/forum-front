@@ -25,6 +25,7 @@ import { AddDocumentationComponent } from './Admin/documentations-table/add-docu
 import { DocumentationsComponent } from './documentations/documentations.component';
 import { DocumentationDetailsComponent } from './documentations/documentation-details/documentation-details.component';
 import { JwtInterceptorProvider } from './Services/jwt.interceptor';
+import { EditBpComponent } from './Admin/bestpractices-table/edit-bp/edit-bp.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { JwtInterceptorProvider } from './Services/jwt.interceptor';
     AddDocumentationComponent,
     DocumentationsComponent,
     DocumentationDetailsComponent,
+    EditBpComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [JwtInterceptorProvider],

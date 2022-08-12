@@ -25,8 +25,6 @@ export class EditEventComponent implements OnInit {
   ngOnInit(): void {
     let id = this.route.snapshot.paramMap.get('id') || '';
     this.eventsService.getEvent(id).subscribe((data) => {
-      console.log(data);
-      // format dates to yyyy-MM-dd
       this.event = data;
       this.event.dateCreation = new Date(data.dateCreation)
         .toISOString()

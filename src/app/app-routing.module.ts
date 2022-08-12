@@ -1,3 +1,4 @@
+import { EditBpComponent } from './Admin/bestpractices-table/edit-bp/edit-bp.component';
 import { DocumentationDetailsComponent } from './documentations/documentation-details/documentation-details.component';
 import { DocumentationsComponent } from './documentations/documentations.component';
 import { AddDocumentationComponent } from './Admin/documentations-table/add-documentation/add-documentation.component';
@@ -36,6 +37,7 @@ const routes: Routes = [
         children: [
           { path: '', component: BestpracticesTableComponent },
           { path: 'add', component: AddBestpracticeComponent },
+          { path: 'edit/:id', component: EditBpComponent },
         ],
       },
       {
