@@ -24,6 +24,7 @@ import { DocumentationsTableComponent } from './Admin/documentations-table/docum
 import { AddDocumentationComponent } from './Admin/documentations-table/add-documentation/add-documentation.component';
 import { DocumentationsComponent } from './documentations/documentations.component';
 import { DocumentationDetailsComponent } from './documentations/documentation-details/documentation-details.component';
+import { JwtInterceptorProvider } from './Services/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,7 @@ import { DocumentationDetailsComponent } from './documentations/documentation-de
     DocumentationDetailsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
-  providers: [],
+  providers: [JwtInterceptorProvider],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

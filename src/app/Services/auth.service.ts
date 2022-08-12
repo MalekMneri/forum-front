@@ -23,7 +23,10 @@ export class AuthService {
         localStorage.setItem('user', JSON.stringify(data.user));
         localStorage.setItem('token', data.token);
         this.cookieService.createMemberCookies(data);
-        this.router.navigate(['/bestPractices']);
+        console.log(data.user.role);
+        if (data.user.role !== 'ADMINISTRATOR')
+          this.router.navigate(['/bestPractices']);
+        else this.router.navigate(['/dashboard/bestPractices']);
       });
   }
   register(credentials: any) {

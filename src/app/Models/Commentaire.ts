@@ -1,6 +1,6 @@
 export class Commentaire {
   idCom: number | undefined;
-  commentateur: string | undefined;
+  user: any | undefined;
   commentaire: string | undefined;
   dateCreation: Date | undefined;
   nbrlikes: number | undefined;

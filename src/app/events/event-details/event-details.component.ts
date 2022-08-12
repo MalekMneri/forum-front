@@ -24,7 +24,6 @@ export class EventDetailsComponent implements OnInit {
     user: 0,
   };
   idEvent = '0';
-  likedComments: number[] = [];
   constructor(
     private route: ActivatedRoute,
     private commentService: CommentsService,
@@ -32,9 +31,6 @@ export class EventDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.likedComments = JSON.parse(
-      localStorage.getItem('likedComments') || '[]'
-    );
     this.idEvent = this.route.snapshot.paramMap.get('id') || '0';
     this.eventsService.getEvent(this.idEvent).subscribe((data) => {
       console.log(data);
@@ -50,8 +46,9 @@ export class EventDetailsComponent implements OnInit {
   }
 
   addComment(commentForm: NgForm) {
+    let user = JSON.parse(localStorage.getItem('user') || '{}');
     commentForm.value.event = this.event.idEvent;
-    commentForm.value.commentateur = 'Commentateur 1';
+    commentForm.value.user = user;
     commentForm.value.dateCreation = new Date();
     commentForm.value.nbrlikes = 0;
     commentForm.value.useful = false;
@@ -66,10 +63,12 @@ export class EventDetailsComponent implements OnInit {
   }
 
   likeComment(comment: Commentaire) {
-    this.commentService.likeComment(comment).subscribe((data: any) => {
-      this.getComments(this.idEvent);
-      this.likedComments.push(comment.idCom ?? 0);
-      localStorage.setItem('likedComments', JSON.stringify(this.likedComments));
-    });
+    let user = JSON.parse(localStorage.getItem('user') || '{}');
+    console.log(user, comment.likes);
+    if (!comment.likes?.find((like) => like.user.idUser === user.idUser)) {
+      this.commentService.likeComment(comment).subscribe((data: any) => {
+        this.getComments(this.idEvent);
+      });
+    }
   }
 }
