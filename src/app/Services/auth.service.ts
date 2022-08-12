@@ -1,4 +1,3 @@
-import { CookiesService } from './cookies.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -8,11 +7,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   authRoute: string;
-  constructor(
-    private http: HttpClient,
-    private cookieService: CookiesService,
-    private router: Router
-  ) {
+  constructor(private http: HttpClient, private router: Router) {
     this.authRoute = 'http://localhost:8081/';
   }
   login(credentials: any) {
@@ -22,7 +17,6 @@ export class AuthService {
         console.log(data.user);
         localStorage.setItem('user', JSON.stringify(data.user));
         localStorage.setItem('token', data.token);
-        this.cookieService.createMemberCookies(data);
         console.log(data.user.role);
         if (data.user.role !== 'ADMINISTRATOR')
           this.router.navigate(['/bestPractices']);
@@ -33,17 +27,12 @@ export class AuthService {
     return this.http
       .post('http://localhost:8081/register', credentials)
       .subscribe((data: any) => {
-        this.cookieService.createMemberCookies(data);
-        this.router.navigate(['/bestPractices']);
+        this.router.navigate(['/login']);
       });
   }
 
   logout() {
     localStorage.clear();
     this.router.navigate(['/login']);
-  }
-
-  isLoggedIn() {
-    return this.cookieService.readCookie('_token') !== null;
   }
 }

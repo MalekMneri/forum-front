@@ -1,4 +1,3 @@
-import { CookiesService } from './cookies.service';
 import { Injectable } from '@angular/core';
 import {
   HttpRequest,
@@ -11,7 +10,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  constructor(private cookies: CookiesService) {}
+  constructor() {}
 
   intercept(
     request: HttpRequest<unknown>,
