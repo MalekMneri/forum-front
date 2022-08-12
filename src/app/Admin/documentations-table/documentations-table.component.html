@@ -10,18 +10,16 @@
   <br>
   <table class="table table-striped table-light">
     <thead>
-      <th>Titre</th>
+      <th>Title</th>
       <th>Description</th>
-      <th>Date de creation</th>
-      <th>Pièce jointe</th>
+      <th>Creation date</th>
       <th>Actions</th>
     </thead>
     <tbody>
       <tr *ngFor="let documentation of documentations">
         <td>{{documentation.titre}}</td>
-        <td>{{documentation.descriptionD}}</td>
+        <td>{{documentation.description}}</td>
         <td>{{documentation.dateCreation | date}}</td>
-        <td> {{documentation.pieceJointe}}</td>
         <td> <em routerLink="/dashboard/documentations/edit/{{documentation.idDoc}}" class="fa fa-edit mr-4 action-button"></em> <em class="fa fa-trash action-button" (click)="deleteDocumentation(documentation.idDoc)"></em> </td>
       </tr>
     </tbody>

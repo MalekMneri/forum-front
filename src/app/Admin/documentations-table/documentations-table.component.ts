@@ -15,9 +15,12 @@ export class DocumentationsTableComponent implements OnInit {
     private docService: DocumentationsService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getDocs();
+  }
   getDocs() {
     this.docService.getDocumentations().subscribe((data: any) => {
+      console.log(data);
       this.documentations = data;
     });
   }
