@@ -1,16 +1,16 @@
 <div class="container">
   <br>
-  <h3>Gestion des utilisateurs</h3>
+  <h3>Users management</h3>
   <br>
   <br>
   <table class="table table-striped table-light">
     <thead>
-      <th>Nom complet</th>
+      <th>Full name</th>
       <th>CIN</th>
       <th>Username</th>
       <th>Email</th>
       <th>Role</th>
-      <th>Vérifié </th>
+      <th>isVerified</th>
     </thead>
     <tbody>
       <tr *ngFor="let user of users">
@@ -20,7 +20,7 @@
         <td>{{user.emailUser}}</td>
         <td>{{user.role}}</td>
         <td> <em class="fa fa-check text-success" *ngIf="user.verified"></em>
-          <a (click)="validateUser(user.idUser)" *ngIf="!user.verified">vérifier</a>
+          <span (click)="validateUser(user.idUser)" *ngIf="!user.verified" class="validate-btn">verify User</span>
         </td>
 
       </tr>

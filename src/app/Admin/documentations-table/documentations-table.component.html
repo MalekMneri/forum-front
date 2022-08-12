@@ -13,18 +13,16 @@
       <th>Titre</th>
       <th>Description</th>
       <th>Date de creation</th>
-      <th>Date de cloture</th>
-      <th>Résolu</th>
+      <th>Pièce jointe</th>
       <th>Actions</th>
     </thead>
     <tbody>
-      <tr *ngFor="let event of documentations">
-        <td>{{event.titre}}</td>
-        <td>{{event.description}}</td>
-        <td>{{event.dateCreation | date}}</td>
-        <td>{{event.dateCloture | date}}</td>
-        <td> <em class="fa {{ event.solved ? 'fa-check text-success':'fa-xmark text-danger' }}"></em> </td>
-        <td> <em routerLink="/dashboard/events/edit/{{event.idEvent}}" class="fa fa-edit mr-4 action-button"></em> <em class="fa fa-trash action-button" (click)="deleteDocumentation(event.idEvent)"></em> </td>
+      <tr *ngFor="let documentation of documentations">
+        <td>{{documentation.titre}}</td>
+        <td>{{documentation.descriptionD}}</td>
+        <td>{{documentation.dateCreation | date}}</td>
+        <td> {{documentation.pieceJointe}}</td>
+        <td> <em routerLink="/dashboard/documentations/edit/{{documentation.idDoc}}" class="fa fa-edit mr-4 action-button"></em> <em class="fa fa-trash action-button" (click)="deleteDocumentation(documentation.idDoc)"></em> </td>
       </tr>
     </tbody>
   </table>
