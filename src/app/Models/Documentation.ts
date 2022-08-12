@@ -1,5 +1,5 @@
 export class Documentation {
-  idDoc: string | undefined;
+  idDoc: number | undefined;
   titre: string | undefined;
   description: string | undefined;
   dateCreation: Date | undefined;

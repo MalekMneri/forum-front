@@ -30,4 +30,15 @@ export class DocumentationsComponent implements OnInit {
       this.documentations = data;
     });
   }
+  downloadFile(id: number = 0) {
+    this.documentationService.downloadFile(id.toString()).subscribe((data) => {
+      console.log(data);
+      const blob = new Blob([data], { type: data.type });
+      const url = window.URL.createObjectURL(blob);
+      window.open(url);
+    }),
+      (error: any) => {
+        console.log(error);
+      };
+  }
 }

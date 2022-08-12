@@ -4,7 +4,7 @@
   <br>
   <div class="row">
     <a routerLink="add" class="btn btn-primary"> <em class="fa fa-plus"></em> Add event</a>
-    <input type="text" class="input-group-text ml-auto" [(ngModel)]="searchTerm" (keydown.enter)="searchEvents()">
+    <input type="text" placeholder="search events" class="input-group-text ml-auto" [(ngModel)]="searchTerm" (keydown.enter)="searchEvents()">
   </div>
   <br>
   <br>
@@ -23,7 +23,9 @@
         <td>{{event.description}}</td>
         <td>{{event.dateCreation | date}}</td>
         <td>{{event.dateCloture | date}}</td>
-        <td> <em class="fa {{ event.solved ? 'fa-check text-success':'fa-xmark text-danger' }}"></em> </td>
+        <td> <span *ngIf="!event.solved" class="text-danger validate-btn" (click)="validateEvent(event.idEvent)">validate</span>
+          <em *ngIf="event.solved" class="fa fa-check text-success"></em>
+        </td>
         <td> <em routerLink="/dashboard/events/edit/{{event.idEvent}}" class="fa fa-edit mr-4 action-button"></em> <em class="fa fa-trash action-button" (click)="deleteEvent(event.idEvent)"></em> </td>
       </tr>
     </tbody>

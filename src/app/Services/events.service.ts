@@ -29,4 +29,7 @@ export class EventsService {
   editEvent(event: Event, id: string) {
     return this.http.put<any>(this.apiRoute + 'edite/' + id, event);
   }
+  validateEvent(id: string) {
+    return this.http.put<any>(this.apiRoute + 'validateEvent/' + id, null);
+  }
 }

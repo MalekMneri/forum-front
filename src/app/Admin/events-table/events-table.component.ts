@@ -31,4 +31,9 @@ export class EventsTableComponent implements OnInit {
       this.events = data;
     });
   }
+  validateEvent(id: number) {
+    this.eventsService.validateEvent(id.toString()).subscribe((data) => {
+      this.getEvents();
+    });
+  }
 }

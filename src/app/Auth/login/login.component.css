@@ -1,0 +1,14 @@
+.btn-sopra {
+  background-color: #ff960c;
+  border: 1px solid #ff960c;
+  font-weight: bold;
+}
+
+.btn-sopra:hover {
+  background-color: #da8313;
+  border: 1px solid #ff960c;
+}
+
+.text-sopra {
+  color: #ff960c;
+}

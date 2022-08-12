@@ -23,6 +23,7 @@ export class EventDetailsComponent implements OnInit {
     pieceJointe: '',
     user: 0,
   };
+  errorCommentId: number = 0;
   idEvent = '0';
   constructor(
     private route: ActivatedRoute,
@@ -69,6 +70,11 @@ export class EventDetailsComponent implements OnInit {
       this.commentService.likeComment(comment).subscribe((data: any) => {
         this.getComments(this.idEvent);
       });
+    } else {
+      this.errorCommentId = comment.idCom || 0;
+      setTimeout(() => {
+        this.errorCommentId = 0;
+      }, 2000);
     }
   }
 }

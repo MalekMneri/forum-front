@@ -22,4 +22,9 @@ export class DocumentationsService {
   addDocumentation(documentation: any) {
     return this.http.post(this.apiRoute + 'upload', documentation);
   }
+  downloadFile(id: string) {
+    return this.http.get(this.apiRoute + 'download/' + id, {
+      responseType: 'blob',
+    });
+  }
 }

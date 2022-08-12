@@ -4,3 +4,11 @@
 .action-button{
   cursor: pointer;
 }
+.validate-btn {
+  cursor: pointer;
+  color: tomato;
+}
+
+.validate-btn:hover {
+  text-decoration: underline;
+}

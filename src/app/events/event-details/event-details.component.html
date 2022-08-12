@@ -32,6 +32,7 @@
           {{comment.commentaire}}
         </div>
       </div>
+      <small *ngIf="errorCommentId === comment.idCom" class="ml-2 mb-3 text-danger">You already liked this comment</small>
     </div>
     <form method="post" #commentForm="ngForm">
       <div class="form-group flex-row">
