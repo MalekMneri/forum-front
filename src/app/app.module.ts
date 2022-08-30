@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { RegisterComponent } from './Auth/register/register.component';
-import { EventsComponent } from './events/events.component';
 import { EventDetailsComponent } from './events/event-details/event-details.component';
 import { BestpracticesComponent } from './bestpractices/bestpractices.component';
 import { BpDetailsComponent } from './bestpractices/bp-details/bp-details.component';
@@ -34,7 +33,6 @@ import { CreateOrderComponent } from './create-order/create-order.component';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    EventsComponent,
     EventDetailsComponent,
     BestpracticesComponent,
     BpDetailsComponent,

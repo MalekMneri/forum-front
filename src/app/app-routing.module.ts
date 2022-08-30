@@ -14,7 +14,6 @@ import { EventsTableComponent } from './Admin/events-table/events-table.componen
 import { UsersTableComponent } from './Admin/users-table/users-table.component';
 import { RegisterComponent } from './Auth/register/register.component';
 import { EventDetailsComponent } from './events/event-details/event-details.component';
-import { EventsComponent } from './events/events.component';
 import { BpDetailsComponent } from './bestpractices/bp-details/bp-details.component';
 import { BestpracticesComponent } from './bestpractices/bestpractices.component';
 import { LoginComponent } from './Auth/login/login.component';
