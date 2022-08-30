@@ -26,6 +26,8 @@ import { DocumentationsComponent } from './documentations/documentations.compone
 import { DocumentationDetailsComponent } from './documentations/documentation-details/documentation-details.component';
 import { JwtInterceptorProvider } from './Services/jwt.interceptor';
 import { EditBpComponent } from './Admin/bestpractices-table/edit-bp/edit-bp.component';
+import { PendingOrdersComponent } from './validator/pending-orders/pending-orders.component';
+import { CreateOrderComponent } from './create-order/create-order.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { EditBpComponent } from './Admin/bestpractices-table/edit-bp/edit-bp.com
     DocumentationsComponent,
     DocumentationDetailsComponent,
     EditBpComponent,
+    PendingOrdersComponent,
+    CreateOrderComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [JwtInterceptorProvider],

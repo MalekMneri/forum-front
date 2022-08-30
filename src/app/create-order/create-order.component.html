@@ -1,0 +1,89 @@
+<app-header></app-header>
+<div class="container">
+  <!-- bootstrap form -->
+  <br>
+  <br>
+  <form class="w-75 m-auto" #eventForm="ngForm">
+    <h2>Create a new order</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="titre">Order number</label>
+          <input type="number" name="titre" id="titre" class="form-control" ngModel required placeholder="Order number">
+          <!-- <small id="helpId" class="text-muted">Help text</small> -->
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="titre">Currency pair</label>
+          <select name="currencyPair" id="currencyPair" class="form-control" ngModel required>
+            <option *ngFor="let pair of currencyPairs" value="{{pair.id}}">{{pair.name}}</option>
+          </select>
+          <!-- <small id="helpId" class="text-muted">Help text</small> -->
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="orderType">Order type</label>
+          <select name="orderType" id="orderType" class="form-control" ngModel required (change)="changeDirection($event)">
+            <option value="ME">Market execution</option>
+            <option value="PO">Pending order</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="titre">Direction</label>
+          <select name="currencyPair" id="currencyPair" class="form-control" ngModel required>
+            <option *ngFor="let direction of directionList" value="{{direction}}">{{direction}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="titre">Condition</label>
+          <select name="orderType" id="orderType" class="form-control" ngModel required #conditionDropdown>
+            <option value="over">More than</option>
+            <option value="under">Less than</option>
+            <option value="between">Between</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="titre">Value</label>
+          <input type="number" name="titre" id="titre" class="form-control" ngModel required>
+          <!-- <small id="helpId" class="text-muted">Help text</small> -->
+        </div>
+      </div>
+      <div class="col-md-4" *ngIf="conditionDropdown.value === 'between'">
+        <div class="form-group">
+          <label for="titre">&</label>
+          <input type="number" name="titre" id="titre" class="form-control" ngModel required>
+          <!-- <small id="helpId" class="text-muted">Help text</small> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="titre">Price</label>
+      <input type="number" name="titre" id="titre" class="form-control" ngModel required placeholder="price">
+      <!-- <small id="helpId" class="text-muted">Help text</small> -->
+    </div>
+    <div class="form-group">
+      <label for="titre">SL</label>
+      <input type="number" name="titre" id="titre" class="form-control" ngModel required placeholder="SL">
+      <!-- <small id="helpId" class="text-muted">Help text</small> -->
+    </div>
+    <div class="form-group">
+      <label for="titre">TP</label>
+      <input type="number" name="titre" id="titre" class="form-control" ngModel required placeholder="TP">
+      <!-- <small id="helpId" class="text-muted">Help text</small> -->
+    </div>
+    <button type="submit" class="btn btn-primary float-right mt-2">Create order</button>
+  </form>
+</div>

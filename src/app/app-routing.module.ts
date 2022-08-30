@@ -1,3 +1,5 @@
+import { CreateOrderComponent } from './create-order/create-order.component';
+import { PendingOrdersComponent } from './validator/pending-orders/pending-orders.component';
 import { EditBpComponent } from './Admin/bestpractices-table/edit-bp/edit-bp.component';
 import { DocumentationDetailsComponent } from './documentations/documentation-details/documentation-details.component';
 import { DocumentationsComponent } from './documentations/documentations.component';
@@ -50,10 +52,11 @@ const routes: Routes = [
       { path: 'users', component: UsersTableComponent },
     ],
   },
+  { path: 'add-order', component: CreateOrderComponent },
   {
-    path: 'events',
+    path: 'pending-orders',
     children: [
-      { path: '', component: EventsComponent },
+      { path: '', component: PendingOrdersComponent },
       { path: ':id', component: EventDetailsComponent },
     ],
   },
