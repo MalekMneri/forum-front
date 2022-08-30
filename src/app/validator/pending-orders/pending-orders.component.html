@@ -1,0 +1,58 @@
+<app-header></app-header>
+<div class="container">
+  <br>
+  <div class="row">
+    <h2 class="mt-1">Orders</h2>
+    <span class="mt-2 mr-3 ml-auto ">
+      <input type="text" class="form-control form-control-sm" placeholder="Search forum" [(ngModel)]="searchTerm" (keydown.enter)="search()" />
+    </span>
+  </div>
+  <!-- Inner main header -->
+  <hr>
+  <div class="card order-item mb-3" *ngFor="let order of orders">
+    <div class="card-body">
+      <div class="row mb-2">
+        <div class="col-md-4"><span class="order-label">Order number: </span>{{ order.orderNumber}}</div>
+        <div class="col-md-4"><span class="order-label">Currency pair: </span>{{order.currencyPair}}</div>
+        <div class="col-md-4"><span class="order-label">Order type: </span>{{ order.orderType }}</div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-md-4"><span class="order-label">Direction: </span>{{ order.direction}}</div>
+        <div class="col-md-8"><span class="order-label">Condition: </span>{{ order.condition === "between" ? order.conditionValue1 + "> price >"+ order.conditionValue2 : order.condition === "over" ? ">" + order.conditionValue1 : ">" + order.conditionValue2 }}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-4"><span class="order-label">Price:</span>{{ order.price}}</div>
+        <div class="col-md-4"><span class="order-label">SL:</span>{{order.SL}}</div>
+        <div class="col-md-4"><span class="order-label">TP:</span>{{ order.TP }}</div>
+      </div>
+      <hr>
+      <form method="post" #calculateForm="ngForm">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="capital">Capital</label>
+              <input class="form-control" id="capital" name="capital" placeholder="capital" ngModel required>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="percentage">Percentage</label>
+              <input class="form-control" id="percentage" name="percentage" placeholder="--%" ngModel required>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary mr-3" (click)="calculateLot(order,calculateForm)">Calculate</button>
+            <span class="order-label">Lot: {{order.lot}}</span>
+          </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-success float-right ml-2">Validate Order</button>
+            <button type="submit" class="btn btn-danger float-right">Cancel Order</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
