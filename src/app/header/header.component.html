@@ -5,17 +5,8 @@
   </button>
   <div class="collapse navbar-collapse" id="collapsibleNavId">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item" routerLink="/add-order" routerLinkActive="active">
-        <a class="nav-link">Add order</a>
-      </li>
-      <li class="nav-item" routerLink="/pending-orders" routerLinkActive="active">
-        <a class="nav-link">Pending orders</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/bestPractices" routerLinkActive="active">Best Practices</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/documentations" routerLinkActive="active">Documentations</a>
+      <li *ngFor="let item of navItems" class="nav-item" routerLink="/{{item.link}}" routerLinkActive="active">
+        <a class="nav-link">{{item.name}}</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">

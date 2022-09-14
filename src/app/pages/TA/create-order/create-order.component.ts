@@ -36,9 +36,9 @@ export class CreateOrderComponent implements OnInit {
     const type = event.target.value;
     if (type === 'ME') {
       this.directionList = ['BUY', 'SELL'];
-      this.showCondition = true;
-    } else if (type === 'PO') {
       this.showCondition = false;
+    } else if (type === 'PO') {
+      this.showCondition = true;
       this.directionList = ['BUY STOP', 'BUY LIMIT', 'SELL STOP', 'SELL LIMIT'];
     }
   }

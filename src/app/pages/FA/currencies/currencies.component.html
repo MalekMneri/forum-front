@@ -1,0 +1,104 @@
+<app-header></app-header>
+<div class="container">
+  <br>
+  <h3>Spread definition:</h3>
+  <br>
+  <form spreadForm="ngForm">
+    <div class="row">
+      <div class="col-md-5">
+        <div class="form-group">
+          <label for="titre">Currency pair</label>
+          <select name="orderType" id="orderType" class="form-control" ngModel required #conditionDropdown>
+            <option value="over">More than</option>
+            <option value="under">Less than</option>
+            <option value="between">Between</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="form-group">
+          <label for="titre">Spread</label>
+          <input type="number" name="titre" id="titre" class="form-control" ngModel required placeholder="price">
+          <!-- <small id="helpId" class="text-muted">Help text</small> -->
+        </div>
+      </div>
+      <div class="col-md-2 pt-2">
+        <button class="btn btn-primary mt-4">Set spread</button>
+      </div>
+    </div>
+  </form>
+  <hr>
+  <h3>Currency states:</h3>
+  <br>
+  <div class="row">
+    <div class="col-md-6">
+      <table class="table table-bordered">
+        <thead class="thead-inverse">
+          <tr>
+            <th>Currency</th>
+            <th>State</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td scope="row">Dollar</td>
+            <td>Going up</td>
+          </tr>
+          <tr>
+            <td scope="row">Euro</td>
+            <td>Going down</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <form recommendationForm="ngForm">
+        <div class="form-group">
+          <label for="titre">Currency pair</label>
+          <select name="orderType" id="orderType" class="form-control" ngModel required #conditionDropdown>
+            <option value="over">More than</option>
+            <option value="under">Less than</option>
+            <option value="between">Between</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="titre">State</label>
+          <select name="orderType" id="orderType" class="form-control" ngModel required #conditionDropdown>
+            <option value="over">Going up</option>
+            <option value="under">Going down</option>
+            <option value="between">Stable</option>
+            <option value="between">Unknown</option>
+          </select>
+        </div>
+        <button class="btn btn-primary float-right">Save</button>
+      </form>
+    </div>
+  </div>
+  <hr>
+  <h3>Recommendation:</h3>
+  <br>
+  <form recommendationForm="ngForm">
+    <div class="row">
+      <div class="col-md-5">
+        <div class="form-group">
+          <label for="titre">Currency pair</label>
+          <select name="orderType" id="orderType" class="form-control" ngModel required #conditionDropdown>
+            <option value="over">More than</option>
+            <option value="under">Less than</option>
+            <option value="between">Between</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="form-group">
+          <label for="titre">Recommendation</label>
+          <input type="number" name="titre" id="titre" class="form-control" ngModel required placeholder="price">
+          <!-- <small id="helpId" class="text-muted">Help text</small> -->
+        </div>
+      </div>
+      <div class="col-md-2 pt-2">
+        <button class="btn btn-primary mt-4">Save</button>
+      </div>
+    </div>
+  </form>
+</div>

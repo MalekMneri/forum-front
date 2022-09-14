@@ -1,6 +1,6 @@
 import { AuthService } from './../Services/auth.service';
 import { Component, OnInit } from '@angular/core';
-
+import { navItems } from './nav-items';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   constructor(private auth: AuthService) {}
-
+  navItems = navItems;
   ngOnInit(): void {}
 
   logout() {

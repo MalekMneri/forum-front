@@ -6,14 +6,8 @@
   <form class="w-75 m-auto" #eventForm="ngForm">
     <h2>Create a new order</h2>
     <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="titre">Order number</label>
-          <input type="number" name="titre" id="titre" class="form-control" ngModel required placeholder="Order number">
-          <!-- <small id="helpId" class="text-muted">Help text</small> -->
-        </div>
-      </div>
-      <div class="col-md-6">
+
+      <div class="col-md-4">
         <div class="form-group">
           <label for="titre">Currency pair</label>
           <select name="currencyPair" id="currencyPair" class="form-control" ngModel required>
@@ -22,9 +16,7 @@
           <!-- <small id="helpId" class="text-muted">Help text</small> -->
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="form-group">
           <label for="orderType">Order type</label>
           <select name="orderType" id="orderType" class="form-control" ngModel required (change)="changeDirection($event)">
@@ -33,7 +25,7 @@
           </select>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="form-group">
           <label for="titre">Direction</label>
           <select name="currencyPair" id="currencyPair" class="form-control" ngModel required>
@@ -42,7 +34,7 @@
         </div>
       </div>
     </div>
-    <div class="row" *ngIf="!showCondition">
+    <div class="row" *ngIf="showCondition">
       <div class="col-md-4">
         <div class="form-group">
           <label for="titre">Condition</label>

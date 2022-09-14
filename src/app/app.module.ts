@@ -9,8 +9,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { JwtInterceptorProvider } from './Services/jwt.interceptor';
-import { PendingOrdersComponent } from './validator/pending-orders/pending-orders.component';
-import { CreateOrderComponent } from './TA/create-order/create-order.component';
+import { PendingOrdersComponent } from './pages/validator/pending-orders/pending-orders.component';
+import { CreateOrderComponent } from './pages/TA/create-order/create-order.component';
+import { MyOrdersComponent } from './pages/TA/my-orders/my-orders.component';
+import { CurrenciesComponent } from './pages/FA/currencies/currencies.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { CreateOrderComponent } from './TA/create-order/create-order.component';
     HeaderComponent,
     PendingOrdersComponent,
     CreateOrderComponent,
+    MyOrdersComponent,
+    CurrenciesComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [JwtInterceptorProvider],
