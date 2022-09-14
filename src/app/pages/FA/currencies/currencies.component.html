@@ -5,7 +5,7 @@
   <br>
   <form spreadForm="ngForm">
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-6">
         <div class="form-group">
           <label for="titre">Currency pair</label>
           <select name="orderType" id="orderType" class="form-control" ngModel required #conditionDropdown>
@@ -15,23 +15,23 @@
           </select>
         </div>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-6">
         <div class="form-group">
           <label for="titre">Spread</label>
           <input type="number" name="titre" id="titre" class="form-control" ngModel required placeholder="price">
           <!-- <small id="helpId" class="text-muted">Help text</small> -->
         </div>
       </div>
-      <div class="col-md-2 pt-2">
-        <button class="btn btn-primary mt-4">Set spread</button>
-      </div>
     </div>
+    <button class="btn btn-primary float-right">Set spread</button>
   </form>
+  <br>
+  <br>
   <hr>
   <h3>Currency states:</h3>
   <br>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-5">
       <table class="table table-bordered">
         <thead class="thead-inverse">
           <tr>
@@ -51,7 +51,7 @@
         </tbody>
       </table>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-7">
       <form recommendationForm="ngForm">
         <div class="form-group">
           <label for="titre">Currency pair</label>
@@ -79,7 +79,7 @@
   <br>
   <form recommendationForm="ngForm">
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-6">
         <div class="form-group">
           <label for="titre">Currency pair</label>
           <select name="orderType" id="orderType" class="form-control" ngModel required #conditionDropdown>
@@ -89,16 +89,14 @@
           </select>
         </div>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-6">
         <div class="form-group">
           <label for="titre">Recommendation</label>
           <input type="number" name="titre" id="titre" class="form-control" ngModel required placeholder="price">
           <!-- <small id="helpId" class="text-muted">Help text</small> -->
         </div>
       </div>
-      <div class="col-md-2 pt-2">
-        <button class="btn btn-primary mt-4">Save</button>
-      </div>
     </div>
+    <button class="btn btn-primary float-right">Add recommendation</button>
   </form>
 </div>
