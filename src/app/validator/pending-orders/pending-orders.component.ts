@@ -13,12 +13,12 @@ export class PendingOrdersComponent implements OnInit {
       orderNumber: '564',
       currencyPair: 'AUDJPY',
       orderType: 'pendingOrder',
-      direction: 'BUY STOP',
+      direction: 'SELL STOP',
       condition: 'over',
       conditionValue1: 220,
       conditionValue2: null,
-      price: 120,
-      SL: 100,
+      price: 1.16975,
+      SL: 1.17166,
       TP: 100,
       lot: 0,
     },
@@ -39,13 +39,13 @@ export class PendingOrdersComponent implements OnInit {
       orderNumber: '564',
       currencyPair: 'AUDJPY',
       orderType: 'pendingOrder',
-      direction: 'BUY STOP',
+      direction: 'SELL STOP',
       condition: 'over',
       conditionValue1: 2,
       conditionValue2: null,
-      price: 120,
-      SL: 100,
-      TP: 100,
+      price: 150,
+      SL: 200,
+      TP: 0,
       lot: 0,
     },
     {
@@ -84,10 +84,11 @@ export class PendingOrdersComponent implements OnInit {
       order.lot =
         (form.value.capital * form.value.percentage) /
         100 /
-        (order.price - order.SL);
+        (order.price - (order.SL - 20));
     else if (['SELL', 'SELL STOP', 'SELL LIMIT'].includes(order.direction))
       order.lot =
-        (form.value.capital * form.value.percentage) / 100 / order.SL -
-        order.price;
+        (form.value.capital * form.value.percentage) /
+        100 /
+        (order.SL + 20 - order.price);
   }
 }

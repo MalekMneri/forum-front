@@ -7,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateOrderComponent implements OnInit {
   constructor() {}
+  showCondition = false;
   directionList: string[] = [];
   currencyPairs = [
-    { id: 1, name: 'BTCUSDT' },
+    { id: 1, name: 'BTCUSDT', spread: 20 },
     { id: 1, name: 'BTCUSDT' },
     { id: 1, name: 'BTCUSDT' },
     { id: 1, name: 'BTCUSDT' },
@@ -33,8 +34,12 @@ export class CreateOrderComponent implements OnInit {
   ngOnInit(): void {}
   changeDirection(event: any) {
     const type = event.target.value;
-    if (type === 'ME') this.directionList = ['BUY', 'SELL'];
-    else if (type === 'PO')
+    if (type === 'ME') {
+      this.directionList = ['BUY', 'SELL'];
+      this.showCondition = true;
+    } else if (type === 'PO') {
+      this.showCondition = false;
       this.directionList = ['BUY STOP', 'BUY LIMIT', 'SELL STOP', 'SELL LIMIT'];
+    }
   }
 }
