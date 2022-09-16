@@ -1,5 +1,5 @@
 export class Order {
-  orderNumber: number;
+  id: number;
   currencyPair: string;
   orderType: string;
   direction: string;
@@ -12,4 +12,6 @@ export class Order {
   lot: number;
   creator: number;
   state: string; // approved, canceled, pending
+  capital: number;
+  percentage: number;
 }
