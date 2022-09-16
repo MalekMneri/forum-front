@@ -9,10 +9,10 @@
   </div>
   <!-- Inner main header -->
   <hr>
-  <div class="card order-item mb-3" *ngFor="let order of orders">
+  <div class="card order-item mb-3" [style.background-color]="order.state === 'pending' ? '#aecfec4a' : (order.state === 'approved' ? '#f0a9a84a' : '#6aa84f5a' ) " *ngFor="let order of orders">
     <div class="card-body">
       <div class="row mb-2">
-        <div class="col-md-4"><span class="order-label">Order number: </span>{{ order.orderNumber}}</div>
+        <div class="col-md-4"><span class="order-label">Order number: </span>{{ order.id}}</div>
         <div class="col-md-4"><span class="order-label">Currency pair: </span>{{order.currencyPair}}</div>
         <div class="col-md-4"><span class="order-label">Order type: </span>{{ order.orderType }}</div>
       </div>
@@ -27,14 +27,15 @@
       </div>
       <hr>
       <div class="row">
-        <div class="col-md-6"><span class="order-label">Currency pair: </span>{{order.currencyPair}}</div>
-        <div class="col-md-6"><span class="order-label">Order type: </span>{{ order.orderType }}</div>
+        <div class="col-md-6"><span class="order-label">Capital: </span>{{order.capital}}</div>
+        <div class="col-md-6"><span class="order-label">Percentage: </span>{{ order.percentage }}</div>
       </div>
       <div class="row">
         <div class="col-md-6">
           <p class="order-label">Lot: {{order.lot}}</p>
         </div>
         <div class="col-md-6">
+          <button class="btn btn-danger float-right" *ngIf="order.state === 'pending'" (click)="cancelOrder(order.id)">Cancel</button>
         </div>
       </div>
     </div>

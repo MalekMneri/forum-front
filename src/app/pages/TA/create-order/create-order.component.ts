@@ -1,3 +1,5 @@
+import { OrdersService } from './../../../Services/orders.service';
+import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,31 +8,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-order.component.css'],
 })
 export class CreateOrderComponent implements OnInit {
-  constructor() {}
+  constructor(private orderService: OrdersService) {}
   showCondition = false;
   directionList: string[] = [];
   currencyPairs = [
-    { id: 1, name: 'BTCUSDT', spread: 20 },
-    { id: 1, name: 'BTCUSDT' },
-    { id: 1, name: 'BTCUSDT' },
-    { id: 1, name: 'BTCUSDT' },
-    { id: 1, name: 'BTCUSDT' },
-    { id: 1, name: 'BTCUSDT' },
-    { id: 1, name: 'BTCUSDT' },
-    { id: 1, name: 'BTCUSDT' },
-    { id: 1, name: 'BTCUSDT' },
-    { id: 1, name: 'BTCUSDT' },
-    { id: 1, name: 'BTCUSDT' },
-    { id: 1, name: 'BTCUSDT' },
-    { id: 1, name: 'BTCUSDT' },
-    { id: 1, name: 'BTCUSDT' },
-    { id: 1, name: 'BTCUSDT' },
-    { id: 1, name: 'BTCUSDT' },
-    { id: 1, name: 'BTCUSDT' },
-    { id: 1, name: 'BTCUSDT' },
-    { id: 1, name: 'BTCUSDT' },
+    'BTCUSDT',
+    'BTCUSDT',
+    'BTCUSDT',
+    'BTCUSDT',
+    'BTCUSDT',
+    'BTCUSDT',
+    'BTCUSDT',
+    'BTCUSDT',
+    'BTCUSDT',
+    'BTCUSDT',
+    'BTCUSDT',
   ];
-
+  showError = false;
   ngOnInit(): void {}
   changeDirection(event: any) {
     const type = event.target.value;
@@ -41,5 +35,20 @@ export class CreateOrderComponent implements OnInit {
       this.showCondition = true;
       this.directionList = ['BUY STOP', 'BUY LIMIT', 'SELL STOP', 'SELL LIMIT'];
     }
+  }
+
+  createOrder(form: NgForm) {
+    if (form.invalid) {
+      this.showError = true;
+      return;
+    }
+    let user = localStorage.getItem('user') || ' ';
+    const idCreator = JSON.parse(user).idUser;
+    form.value.creator = idCreator;
+    form.value.lot = 0;
+    console.log(form.value);
+    //this.orderService.create(form.value).subscribe((data) => {
+    //  console.log(data);
+    //});
   }
 }

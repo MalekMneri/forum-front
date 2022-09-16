@@ -4,12 +4,12 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="collapsibleNavId">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li *ngFor="let item of navItems" class="nav-item" routerLink="/{{item.link}}" routerLinkActive="active">
-        <a class="nav-link">{{item.name}}</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
+    <nav class="nav justify-content-center">
+      <a *ngFor="let item of navItems" class="nav-link" routerLink="/{{item.link}}" routerLinkActive="active">
+        {{item.name}}
+      </a>
+    </nav>
+    <form class="form-inline my-2 ml-auto">
       <p class="nav-link my-2 my-sm-0 logout-btn" (click)="logout()"><i class="fa fa-user"></i> Log Out</p>
     </form>
   </div>

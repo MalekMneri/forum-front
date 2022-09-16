@@ -1,5 +1,5 @@
 export class currencyState {
   id?: number;
-  state?: number;
+  state?: string;
   currency?: string;
 }

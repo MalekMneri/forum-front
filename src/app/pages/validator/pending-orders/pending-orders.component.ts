@@ -1,3 +1,4 @@
+import { Order } from './../../../Models/Order';
 import { OrdersService } from './../../../Services/orders.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -10,57 +11,61 @@ export class PendingOrdersComponent implements OnInit {
   searchTerm = '';
   orders = [
     {
-      orderNumber: '564',
-      currencyPair: 'AUDJPY',
-      orderType: 'pendingOrder',
-      direction: 'SELL STOP',
-      condition: 'over',
-      conditionValue1: 220,
-      conditionValue2: null,
-      price: 1.16975,
-      SL: 1.17166,
-      TP: 100,
-      lot: 0,
-    },
-    {
-      orderNumber: '564',
-      currencyPair: 'AUDJPY',
-      orderType: 'marketExecution',
-      direction: 'BUY',
-      condition: 'between',
-      conditionValue1: 220,
-      conditionValue2: 130,
-      price: 120,
-      SL: 100,
-      TP: 100,
-      lot: 0,
-    },
-    {
-      orderNumber: '564',
+      id: 564,
       currencyPair: 'AUDJPY',
       orderType: 'pendingOrder',
       direction: 'SELL STOP',
       condition: 'over',
       conditionValue1: 2,
-      conditionValue2: null,
+      conditionValue2: undefined,
       price: 150,
       SL: 200,
       TP: 0,
       lot: 0,
+      creator: 0,
+      validator: 0,
+      state: 'pending',
+      capital: 12,
+      percentage: 12,
     },
     {
-      orderNumber: '564',
+      id: 564,
       currencyPair: 'AUDJPY',
       orderType: 'pendingOrder',
-      direction: 'BUY STOP',
+      direction: 'SELL STOP',
       condition: 'over',
       conditionValue1: 2,
-      conditionValue2: null,
-      price: 120,
-      SL: 100,
-      TP: 100,
+      conditionValue2: undefined,
+      price: 150,
+      SL: 200,
+      TP: 0,
+      lot: 0,
+      creator: 0,
+      validator: 0,
+      state: 'pending',
+      capital: 12,
+      percentage: 12,
+    },
+    {
+      id: 564,
+      currencyPair: 'AUDJPY',
+      orderType: 'pendingOrder',
+      direction: 'SELL STOP',
+      condition: 'over',
+      conditionValue1: 2,
+      conditionValue2: undefined,
+      price: 150,
+      SL: 200,
+      TP: 0,
+      lot: 0,
+      creator: 0,
+      validator: 0,
+      state: 'pending',
+      capital: 12,
+      percentage: 12,
     },
   ];
+  showError = false;
   constructor(private orderService: OrdersService) {}
 
   ngOnInit(): void {
@@ -74,10 +79,10 @@ export class PendingOrdersComponent implements OnInit {
   }
   search() {
     if (this.searchTerm.length === 0) this.getOrders();
-    // this.ordersService.search(this.searchTerm).subscribe((data) => {
-    //   console.log(data);
-    //   this.orders = data;
-    // });
+    this.orderService.search(this.searchTerm).subscribe((data: any) => {
+      console.log(data);
+      this.orders = data;
+    });
   }
   calculateLot(order: any, form: NgForm) {
     if (['BUY', 'BUY STOP', 'BUY LIMIT'].includes(order.direction))
@@ -92,5 +97,35 @@ export class PendingOrdersComponent implements OnInit {
         (order.SL + 20 - order.price);
 
     order.lot = order.lot.toFixed(2);
+  }
+  approveOrder(form: NgForm, order: Order) {
+    if (form.invalid) {
+      this.showError = true;
+      return;
+    }
+    const userId = JSON.parse(localStorage.getItem('user') || ' ').idUser;
+    form.value.validatior = userId;
+    form.value.lot = order.lot;
+    console.log(form.value);
+    // this.orderService
+    //   .approveOrder(form.value, order.id || 0)
+    //   .subscribe((data) => {
+    //     console.log(data);
+    //   });
+  }
+  cancelOrder(form: NgForm, order: Order) {
+    if (form.invalid) {
+      this.showError = true;
+      return;
+    }
+    const userId = JSON.parse(localStorage.getItem('user') || ' ').idUser;
+    form.value.validatior = userId;
+    form.value.lot = order.lot;
+    console.log(form.value);
+    // this.orderService
+    //   .cancelOrder(form.value, order.id || 0)
+    //   .subscribe((data) => {
+    //     console.log(data);
+    //   });
   }
 }

@@ -6,15 +6,25 @@ import { RegisterComponent } from './Auth/register/register.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeGuard } from './guards/home.guard';
+import { AccessGuard } from './guards/access.guard';
 
 const routes: Routes = [
-  { path: 'create-order', component: CreateOrderComponent },
-  { path: 'pending-orders', component: PendingOrdersComponent },
+  {
+    path: 'create-order',
+    component: CreateOrderComponent,
+    canActivate: [AccessGuard],
+  },
+  {
+    path: 'orders',
+    component: PendingOrdersComponent,
+    canActivate: [AccessGuard],
+  },
   { path: 'my-orders', component: MyOrdersComponent },
   { path: 'currencies', component: CurrenciesComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: '', redirectTo: '/pending-orders', pathMatch: 'full' },
+  { path: '', canActivate: [HomeGuard], component: MyOrdersComponent },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

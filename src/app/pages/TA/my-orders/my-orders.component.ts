@@ -1,3 +1,4 @@
+import { OrdersService } from './../../../Services/orders.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,62 +7,82 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./my-orders.component.css'],
 })
 export class MyOrdersComponent implements OnInit {
-  constructor() {}
+  constructor(private orderService: OrdersService) {}
   searchTerm = '';
   orders = [
     {
-      orderNumber: '564',
-      currencyPair: 'AUDJPY',
-      orderType: 'pendingOrder',
-      direction: 'SELL STOP',
-      condition: 'over',
-      conditionValue1: 220,
-      conditionValue2: null,
-      price: 1.16975,
-      SL: 1.17166,
-      TP: 100,
-      lot: 0,
-    },
-    {
-      orderNumber: '564',
-      currencyPair: 'AUDJPY',
-      orderType: 'marketExecution',
-      direction: 'BUY',
-      condition: 'between',
-      conditionValue1: 220,
-      conditionValue2: 130,
-      price: 120,
-      SL: 100,
-      TP: 100,
-      lot: 0,
-    },
-    {
-      orderNumber: '564',
+      id: 564,
       currencyPair: 'AUDJPY',
       orderType: 'pendingOrder',
       direction: 'SELL STOP',
       condition: 'over',
       conditionValue1: 2,
-      conditionValue2: null,
+      conditionValue2: undefined,
       price: 150,
       SL: 200,
       TP: 0,
       lot: 0,
+      creator: 0,
+      validator: 0,
+      state: 'pending',
+      capital: 12,
+      percentage: 12,
     },
     {
-      orderNumber: '564',
+      id: 564,
       currencyPair: 'AUDJPY',
       orderType: 'pendingOrder',
-      direction: 'BUY STOP',
+      direction: 'SELL STOP',
       condition: 'over',
       conditionValue1: 2,
-      conditionValue2: null,
-      price: 120,
-      SL: 100,
-      TP: 100,
+      conditionValue2: undefined,
+      price: 150,
+      SL: 200,
+      TP: 0,
+      lot: 0,
+      creator: 0,
+      validator: 0,
+      state: 'pending',
+      capital: 12,
+      percentage: 12,
+    },
+    {
+      id: 564,
+      currencyPair: 'AUDJPY',
+      orderType: 'pendingOrder',
+      direction: 'SELL STOP',
+      condition: 'over',
+      conditionValue1: 2,
+      conditionValue2: undefined,
+      price: 150,
+      SL: 200,
+      TP: 0,
+      lot: 0,
+      creator: 0,
+      validator: 0,
+      state: 'pending',
+      capital: 12,
+      percentage: 12,
     },
   ];
-
-  ngOnInit(): void {}
-  search() {}
+  getOrders() {
+    this.orderService.getMyOrders().subscribe((data: any) => {
+      this.orders = data;
+    });
+  }
+  ngOnInit(): void {
+    this.getOrders();
+  }
+  search() {
+    if (this.searchTerm.length === 0) this.getOrders();
+    this.orderService.searchMyOrders(this.searchTerm).subscribe((data: any) => {
+      console.log(data);
+      this.orders = data;
+    });
+  }
+  cancelOrder(id: number) {
+    this.orderService.deleteOrder(id).subscribe((data) => {
+      console.log('deleted', data);
+    });
+  }
 }

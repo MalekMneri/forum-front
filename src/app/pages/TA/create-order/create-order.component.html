@@ -3,7 +3,7 @@
   <!-- bootstrap form -->
   <br>
   <br>
-  <form class="w-75 m-auto" #eventForm="ngForm">
+  <form class="w-75 m-auto" #orderForm="ngForm">
     <h2>Create a new order</h2>
     <div class="row">
 
@@ -11,7 +11,7 @@
         <div class="form-group">
           <label for="titre">Currency pair</label>
           <select name="currencyPair" id="currencyPair" class="form-control" ngModel required>
-            <option *ngFor="let pair of currencyPairs" value="{{pair.id}}">{{pair.name}}</option>
+            <option *ngFor="let pair of currencyPairs" value="{{pair}}">{{pair}}</option>
           </select>
           <!-- <small id="helpId" class="text-muted">Help text</small> -->
         </div>
@@ -28,7 +28,7 @@
       <div class="col-md-4">
         <div class="form-group">
           <label for="titre">Direction</label>
-          <select name="currencyPair" id="currencyPair" class="form-control" ngModel required>
+          <select name="direction" id="direction" class="form-control" ngModel required>
             <option *ngFor="let direction of directionList" value="{{direction}}">{{direction}}</option>
           </select>
         </div>
@@ -37,8 +37,8 @@
     <div class="row" *ngIf="showCondition">
       <div class="col-md-4">
         <div class="form-group">
-          <label for="titre">Condition</label>
-          <select name="orderType" id="orderType" class="form-control" ngModel required #conditionDropdown>
+          <label for="condition">Condition</label>
+          <select name="condition" id="condition" class="form-control" ngModel [required]="showCondition" #conditionDropdown>
             <option value="over">More than</option>
             <option value="under">Less than</option>
             <option value="between">Between</option>
@@ -47,35 +47,39 @@
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <label for="titre">Value</label>
-          <input type="number" name="titre" id="titre" class="form-control" ngModel required>
+          <label for="conditionValue1">Value</label>
+          <input type="number" name="conditionValue1" id="conditionValue1" class="form-control" ngModel [required]="showCondition">
           <!-- <small id="helpId" class="text-muted">Help text</small> -->
         </div>
       </div>
       <div class="col-md-4" *ngIf="conditionDropdown.value === 'between'">
         <div class="form-group">
-          <label for="titre">&</label>
-          <input type="number" name="titre" id="titre" class="form-control" ngModel required>
+          <label for="conditionValue2">&</label>
+          <input type="number" name="conditionValue2" id="conditionValue2" class="form-control" ngModel [required]="showCondition && conditionDropdown.value === 'between'">
           <!-- <small id="helpId" class="text-muted">Help text</small> -->
         </div>
       </div>
     </div>
 
     <div class="form-group">
-      <label for="titre">Price</label>
-      <input type="number" name="titre" id="titre" class="form-control" ngModel required placeholder="price">
+      <label for="price">Price</label>
+      <input type="number" name="price" id="price" class="form-control" ngModel required placeholder="price">
       <!-- <small id="helpId" class="text-muted">Help text</small> -->
     </div>
     <div class="form-group">
-      <label for="titre">SL</label>
-      <input type="number" name="titre" id="titre" class="form-control" ngModel required placeholder="SL">
+      <label for="SL">SL</label>
+      <input type="number" name="SL" id="SL" class="form-control" ngModel required placeholder="SL">
       <!-- <small id="helpId" class="text-muted">Help text</small> -->
     </div>
     <div class="form-group">
-      <label for="titre">TP</label>
-      <input type="number" name="titre" id="titre" class="form-control" ngModel required placeholder="TP">
+      <label for="TP">TP</label>
+      <input type="number" name="TP" id="TP" class="form-control" ngModel required placeholder="TP">
       <!-- <small id="helpId" class="text-muted">Help text</small> -->
     </div>
-    <button type="submit" class="btn btn-primary float-right mt-2">Create order</button>
+    <button type="submit" class="btn btn-primary float-right mt-2" (click)="createOrder(orderForm)">Create order</button>
+    <div class="row">
+      <div class="alert alert-danger" role="alert" *ngIf="showError &&orderForm.invalid">invalid form:<br>-all fields should be filled<br>-BUY : SL < Price<br>-SELL: SL > Price
+      </div>
+    </div>
   </form>
 </div>

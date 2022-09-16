@@ -11,6 +11,7 @@ export class Order {
   TP?: number;
   lot?: number;
   creator?: number;
+  validator?: number;
   state?: string; // approved, canceled, pending
   capital?: number;
   percentage?: number;
