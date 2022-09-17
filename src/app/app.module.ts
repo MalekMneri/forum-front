@@ -13,6 +13,8 @@ import { PendingOrdersComponent } from './pages/validator/pending-orders/pending
 import { CreateOrderComponent } from './pages/TA/create-order/create-order.component';
 import { MyOrdersComponent } from './pages/TA/my-orders/my-orders.component';
 import { CurrenciesComponent } from './pages/FA/currencies/currencies.component';
+import { RecommendationsComponent } from './pages/validator/recommendations/recommendations.component';
+import { MembersComponent } from './pages/Admin/members/members.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { CurrenciesComponent } from './pages/FA/currencies/currencies.component'
     CreateOrderComponent,
     MyOrdersComponent,
     CurrenciesComponent,
+    RecommendationsComponent,
+    MembersComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [JwtInterceptorProvider],

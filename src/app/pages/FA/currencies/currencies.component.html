@@ -3,27 +3,25 @@
   <br>
   <h3>Spread definition:</h3>
   <br>
-  <form spreadForm="ngForm">
+  <form #spreadForm="ngForm">
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <label for="titre">Currency pair</label>
-          <select name="orderType" id="orderType" class="form-control" ngModel required #conditionDropdown>
-            <option value="over">More than</option>
-            <option value="under">Less than</option>
-            <option value="between">Between</option>
+          <label for="currencyPair">Currency pair</label>
+          <select name="currencyPair" id="currencyPair" class="form-control" ngModel required #conditionDropdown>
+            <option *ngFor="let pair of currencyPairs" value="{{pair}}">{{pair}}</option>
           </select>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label for="titre">Spread</label>
-          <input type="number" name="titre" id="titre" class="form-control" ngModel required placeholder="price">
+          <label for="spread">Spread</label>
+          <input type="number" name="spread" id="spread" class="form-control" ngModel required placeholder="spread">
           <!-- <small id="helpId" class="text-muted">Help text</small> -->
         </div>
       </div>
     </div>
-    <button class="btn btn-primary float-right">Set spread</button>
+    <button class="btn btn-primary float-right" (click)="changeSpread(spreadForm)">Set spread</button>
   </form>
   <br>
   <br>
@@ -52,22 +50,20 @@
       </table>
     </div>
     <div class="col-md-7">
-      <form recommendationForm="ngForm">
+      <form #stateForm="ngForm">
         <div class="form-group">
-          <label for="titre">Currency pair</label>
+          <label for="titre">Currency</label>
           <select name="orderType" id="orderType" class="form-control" ngModel required #conditionDropdown>
-            <option value="over">More than</option>
-            <option value="under">Less than</option>
-            <option value="between">Between</option>
+            <option *ngFor="let currency of currencies" value="{{currency}}">{{currency}}</option>
           </select>
         </div>
         <div class="form-group">
           <label for="titre">State</label>
           <select name="orderType" id="orderType" class="form-control" ngModel required #conditionDropdown>
-            <option value="over">Going up</option>
-            <option value="under">Going down</option>
-            <option value="between">Stable</option>
-            <option value="between">Unknown</option>
+            <option value="up">Going up</option>
+            <option value="down">Going down</option>
+            <option value="stable">Stable</option>
+            <option value="unknown">Unknown</option>
           </select>
         </div>
         <button class="btn btn-primary float-right">Save</button>
@@ -77,26 +73,24 @@
   <hr>
   <h3>Recommendation:</h3>
   <br>
-  <form recommendationForm="ngForm">
+  <form #recommendationForm="ngForm">
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <label for="titre">Currency pair</label>
-          <select name="orderType" id="orderType" class="form-control" ngModel required #conditionDropdown>
-            <option value="over">More than</option>
-            <option value="under">Less than</option>
-            <option value="between">Between</option>
+          <label for="currencyPair">Currency pair</label>
+          <select name="currencyPair" id="currencyPair" class="form-control" ngModel required>
+            <option *ngFor="let pair of currencyPairs" value="{{pair}}">{{pair}}</option>
           </select>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label for="titre">Recommendation</label>
-          <input type="number" name="titre" id="titre" class="form-control" ngModel required placeholder="price">
+          <label for="comment">Recommendation</label>
+          <input type="text" name="comment" id="comment" class="form-control" ngModel required placeholder="comment">
           <!-- <small id="helpId" class="text-muted">Help text</small> -->
         </div>
       </div>
     </div>
-    <button class="btn btn-primary float-right">Add recommendation</button>
+    <button class="btn btn-primary float-right" (click)="addRecommendation(recommendationForm)">Add recommendation</button>
   </form>
 </div>

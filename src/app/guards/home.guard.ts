@@ -30,7 +30,7 @@ export class HomeGuard implements CanActivate {
       else if (role === 'TA') return this.router.createUrlTree(['/my-orders']);
       else if (role === 'CLIENT')
         return this.router.createUrlTree(['/create-order']);
-      else if (role === 'Admin')
+      else if (role === 'ADMINISTRATOR')
         return this.router.createUrlTree(['/pending-orders']);
       else {
         console.log('role not found');

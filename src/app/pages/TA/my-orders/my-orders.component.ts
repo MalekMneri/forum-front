@@ -19,44 +19,9 @@ export class MyOrdersComponent implements OnInit {
       conditionValue1: 2,
       conditionValue2: undefined,
       price: 150,
-      SL: 200,
-      TP: 0,
-      lot: 0,
-      creator: 0,
-      validator: 0,
-      state: 'pending',
-      capital: 12,
-      percentage: 12,
-    },
-    {
-      id: 564,
-      currencyPair: 'AUDJPY',
-      orderType: 'pendingOrder',
-      direction: 'SELL STOP',
-      condition: 'over',
-      conditionValue1: 2,
-      conditionValue2: undefined,
-      price: 150,
-      SL: 200,
-      TP: 0,
-      lot: 0,
-      creator: 0,
-      validator: 0,
-      state: 'pending',
-      capital: 12,
-      percentage: 12,
-    },
-    {
-      id: 564,
-      currencyPair: 'AUDJPY',
-      orderType: 'pendingOrder',
-      direction: 'SELL STOP',
-      condition: 'over',
-      conditionValue1: 2,
-      conditionValue2: undefined,
-      price: 150,
-      SL: 200,
-      TP: 0,
+      sl: 200,
+      date: '',
+      tp: 0,
       lot: 0,
       creator: 0,
       validator: 0,
@@ -74,7 +39,10 @@ export class MyOrdersComponent implements OnInit {
     this.getOrders();
   }
   search() {
-    if (this.searchTerm.length === 0) this.getOrders();
+    if (this.searchTerm.length === 0) {
+      this.getOrders();
+      return;
+    }
     this.orderService.searchMyOrders(this.searchTerm).subscribe((data: any) => {
       console.log(data);
       this.orders = data;
@@ -83,6 +51,7 @@ export class MyOrdersComponent implements OnInit {
   cancelOrder(id: number) {
     this.orderService.deleteOrder(id).subscribe((data) => {
       console.log('deleted', data);
+      this.getOrders();
     });
   }
 }

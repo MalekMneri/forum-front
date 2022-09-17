@@ -1,3 +1,5 @@
+import { MembersComponent } from './pages/Admin/members/members.component';
+import { RecommendationsComponent } from './pages/validator/recommendations/recommendations.component';
 import { CurrenciesComponent } from './pages/FA/currencies/currencies.component';
 import { MyOrdersComponent } from './pages/TA/my-orders/my-orders.component';
 import { CreateOrderComponent } from './pages/TA/create-order/create-order.component';
@@ -16,15 +18,41 @@ const routes: Routes = [
     canActivate: [AccessGuard],
   },
   {
+    path: 'recommendations',
+    component: RecommendationsComponent,
+    canActivate: [AccessGuard],
+  },
+  {
+    path: 'members',
+    component: MembersComponent,
+    canActivate: [AccessGuard],
+  },
+  {
     path: 'orders',
     component: PendingOrdersComponent,
     canActivate: [AccessGuard],
   },
-  { path: 'my-orders', component: MyOrdersComponent },
-  { path: 'currencies', component: CurrenciesComponent },
+  {
+    path: 'my-orders',
+    component: MyOrdersComponent,
+    canActivate: [AccessGuard],
+  },
+  {
+    path: 'currencies',
+    component: CurrenciesComponent,
+    canActivate: [AccessGuard],
+  },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: '', canActivate: [HomeGuard], component: MyOrdersComponent },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [AccessGuard],
+  },
+  {
+    path: '',
+    canActivate: [HomeGuard],
+    component: MyOrdersComponent,
+  },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

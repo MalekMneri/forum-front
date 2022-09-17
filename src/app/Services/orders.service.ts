@@ -23,7 +23,8 @@ export class OrdersService {
     return this.http.get(this.apiRoute + 'search-orders/' + searchTerm);
   }
   searchMyOrders(searchTerm: string) {
-    return this.http.get(this.apiRoute + 'search-my-orders/' + searchTerm);
+    const id = JSON.parse(localStorage.getItem('user') || ' ').idUser;
+    return this.http.get(this.apiRoute + `search-my-order/${id}/${searchTerm}`);
   }
 
   approveOrder(validation: any, orderId: number) {

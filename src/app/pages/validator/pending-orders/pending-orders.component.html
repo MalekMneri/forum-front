@@ -9,45 +9,57 @@
   </div>
   <!-- Inner main header -->
   <hr>
-  <div class="card order-item mb-3" *ngFor="let order of orders">
+  <div class="card order-item mb-3" *ngFor="let order of orders" [style.background-color]="order.state === 'pending' ? '#aecfec4a' : (order.state === 'canceled' ? '#f0a9a84a' : '#6aa84f5a' ) ">
     <div class="card-body">
       <div class="row mb-2">
         <div class="col-md-4"><span class="order-label">Order number: </span>{{ order.id}}</div>
         <div class="col-md-4"><span class="order-label">Currency pair: </span>{{order.currencyPair}}</div>
-        <div class="col-md-4"><span class="order-label">Order type: </span>{{ order.orderType }}</div>
+        <div class="col-md-4"><span class="order-label">Order type: </span>{{ order.orderType === "ME" ? "Market Execution" : "Pending Order" }}</div>
       </div>
       <div class="row mb-2">
         <div class="col-md-4"><span class="order-label">Direction: </span>{{ order.direction}}</div>
-        <div class="col-md-8"><span class="order-label">Condition: </span>{{ order.condition === "between" ? order.conditionValue1 + "> price >"+ order.conditionValue2 : order.condition === "over" ? ">" + order.conditionValue1 : ">" + order.conditionValue2 }}</div>
+        <div class="col-md-4" *ngIf="order.orderType === 'PO'"><span class="order-label">Condition: </span>{{ order.condition === "between" ? order.conditionValue1 + "> price >"+ order.conditionValue2 : order.condition === "over" ? ">" + order.conditionValue1 : ">" + order.conditionValue2 }}</div>
+        <div class="col-md-4"><span class="order-label">Created at: </span>{{ order.date}}</div>
       </div>
       <div class="row">
         <div class="col-md-4"><span class="order-label">Price: </span>{{ order.price}}</div>
-        <div class="col-md-4"><span class="order-label">SL: </span>{{order.SL}}</div>
-        <div class="col-md-4"><span class="order-label">TP: </span>{{ order.TP }}</div>
+        <div class="col-md-4"><span class="order-label">SL: </span>{{order.sl}}</div>
+        <div class="col-md-4"><span class="order-label">TP: </span>{{ order.tp }}</div>
       </div>
-      <hr>
-      <form method="post" #calculateForm="ngForm">
+      <hr *ngIf="order.state !== 'canceled'">
+      <div class="row" *ngIf="order.state === 'approved'">
+        <div class="col-md-6"><span class="order-label">Capital: </span>{{order.capital}}</div>
+        <div class="col-md-6"><span class="order-label">Percentage: </span>{{ order.percentage }}</div>
+      </div>
+      <div class="row" *ngIf="order.state === 'approved'">
+        <div class="col-md-6">
+          <p class="order-label">Lot: {{order.lot}}</p>
+        </div>
+        <div class="col-md-6">
+        </div>
+      </div>
+      <form method="post" #calculateForm="ngForm" *ngIf="order.state === 'pending'">
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
               <label for="capital">Capital</label>
-              <input class="form-control" id="capital" name="capital" placeholder="capital" ngModel required>
+              <input class="form-control" id="capital" name="capital" placeholder="capital" ngModel required [disabled]="order.state !== 'pending'">
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label for="percentage">Percentage</label>
-              <input class="form-control" id="percentage" name="percentage" placeholder="--%" ngModel required>
+              <input class="form-control" id="percentage" name="percentage" placeholder="--%" ngModel required [disabled]="order.state !== 'pending'">
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
-            <button type="submit" class="btn btn-primary mr-3" (click)="calculateLot(order,calculateForm)">Calculate</button>
+            <button type="submit" class="btn btn-primary mr-3" *ngIf="order.state === 'pending'" (click)="calculateLot(order,calculateForm)">Calculate</button>
             <span class="order-label">Lot: {{order.lot}}</span>
             <div class="alert alert-danger mt-2" role="alert" *ngIf="showError">fields empty!</div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6" *ngIf="order.state === 'pending'">
             <button type="submit" class="btn btn-success float-right ml-2" (click)="approveOrder(calculateForm,order)">Validate Order</button>
             <button type="submit" class="btn btn-danger float-right" (click)="cancelOrder(calculateForm,order)">Cancel Order</button>
           </div>

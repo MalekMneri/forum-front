@@ -1,0 +1,8 @@
+.activateBtn {
+  cursor: pointer;
+  color: rgb(230, 95, 95);
+}
+
+.activateBtn:hover {
+  text-decoration: underline;
+}

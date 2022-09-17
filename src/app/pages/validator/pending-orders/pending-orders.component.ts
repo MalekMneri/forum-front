@@ -19,45 +19,10 @@ export class PendingOrdersComponent implements OnInit {
       conditionValue1: 2,
       conditionValue2: undefined,
       price: 150,
-      SL: 200,
-      TP: 0,
+      sl: 200,
+      tp: 0,
       lot: 0,
-      creator: 0,
-      validator: 0,
-      state: 'pending',
-      capital: 12,
-      percentage: 12,
-    },
-    {
-      id: 564,
-      currencyPair: 'AUDJPY',
-      orderType: 'pendingOrder',
-      direction: 'SELL STOP',
-      condition: 'over',
-      conditionValue1: 2,
-      conditionValue2: undefined,
-      price: 150,
-      SL: 200,
-      TP: 0,
-      lot: 0,
-      creator: 0,
-      validator: 0,
-      state: 'pending',
-      capital: 12,
-      percentage: 12,
-    },
-    {
-      id: 564,
-      currencyPair: 'AUDJPY',
-      orderType: 'pendingOrder',
-      direction: 'SELL STOP',
-      condition: 'over',
-      conditionValue1: 2,
-      conditionValue2: undefined,
-      price: 150,
-      SL: 200,
-      TP: 0,
-      lot: 0,
+      date: '',
       creator: 0,
       validator: 0,
       state: 'pending',
@@ -73,12 +38,16 @@ export class PendingOrdersComponent implements OnInit {
   }
 
   getOrders() {
-    // this.orderService.getOrders().subscribe((data) => {
-    //   this.orders = data;
-    // });
+    this.orderService.getOrders().subscribe((data: any) => {
+      this.orders = data;
+      console.log(data);
+    });
   }
   search() {
-    if (this.searchTerm.length === 0) this.getOrders();
+    if (this.searchTerm.length === 0) {
+      this.getOrders();
+      return;
+    }
     this.orderService.search(this.searchTerm).subscribe((data: any) => {
       console.log(data);
       this.orders = data;
@@ -89,12 +58,12 @@ export class PendingOrdersComponent implements OnInit {
       order.lot =
         (form.value.capital * form.value.percentage) /
         100 /
-        (order.price - (order.SL - 20));
+        (order.price - (order.sl - 20));
     else if (['SELL', 'SELL STOP', 'SELL LIMIT'].includes(order.direction))
       order.lot =
         (form.value.capital * form.value.percentage) /
         100 /
-        (order.SL + 20 - order.price);
+        (order.sl + 20 - order.price);
 
     order.lot = order.lot.toFixed(2);
   }
@@ -103,29 +72,33 @@ export class PendingOrdersComponent implements OnInit {
       this.showError = true;
       return;
     }
+    this.calculateLot(order, form);
     const userId = JSON.parse(localStorage.getItem('user') || ' ').idUser;
     form.value.validatior = userId;
     form.value.lot = order.lot;
     console.log(form.value);
-    // this.orderService
-    //   .approveOrder(form.value, order.id || 0)
-    //   .subscribe((data) => {
-    //     console.log(data);
-    //   });
+    this.orderService
+      .approveOrder(form.value, order.id || 0)
+      .subscribe((data) => {
+        console.log(data);
+        this.getOrders();
+      });
   }
   cancelOrder(form: NgForm, order: Order) {
     if (form.invalid) {
       this.showError = true;
       return;
     }
+    this.calculateLot(order, form);
     const userId = JSON.parse(localStorage.getItem('user') || ' ').idUser;
     form.value.validatior = userId;
     form.value.lot = order.lot;
     console.log(form.value);
-    // this.orderService
-    //   .cancelOrder(form.value, order.id || 0)
-    //   .subscribe((data) => {
-    //     console.log(data);
-    //   });
+    this.orderService
+      .cancelOrder(form.value, order.id || 0)
+      .subscribe((data) => {
+        console.log(data);
+        this.getOrders();
+      });
   }
 }

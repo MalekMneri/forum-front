@@ -7,9 +7,10 @@ export class Order {
   conditionValue1?: number;
   conditionValue2?: number;
   price?: number;
-  SL?: number;
-  TP?: number;
+  sl?: number;
+  tp?: number;
   lot?: number;
+  date?: string;
   creator?: number;
   validator?: number;
   state?: string; // approved, canceled, pending

@@ -1,3 +1,4 @@
+import { currencyPairs } from '../../../Models/currencyEnums';
 import { OrdersService } from './../../../Services/orders.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -10,20 +11,8 @@ import { Component, OnInit } from '@angular/core';
 export class CreateOrderComponent implements OnInit {
   constructor(private orderService: OrdersService) {}
   showCondition = false;
+  currencyPairs = currencyPairs;
   directionList: string[] = [];
-  currencyPairs = [
-    'BTCUSDT',
-    'BTCUSDT',
-    'BTCUSDT',
-    'BTCUSDT',
-    'BTCUSDT',
-    'BTCUSDT',
-    'BTCUSDT',
-    'BTCUSDT',
-    'BTCUSDT',
-    'BTCUSDT',
-    'BTCUSDT',
-  ];
   showError = false;
   ngOnInit(): void {}
   changeDirection(event: any) {
@@ -47,8 +36,8 @@ export class CreateOrderComponent implements OnInit {
     form.value.creator = idCreator;
     form.value.lot = 0;
     console.log(form.value);
-    //this.orderService.create(form.value).subscribe((data) => {
-    //  console.log(data);
-    //});
+    this.orderService.create(form.value).subscribe((data) => {
+      console.log(data);
+    });
   }
 }

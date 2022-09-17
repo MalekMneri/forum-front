@@ -5,7 +5,7 @@
   </button>
   <div class="collapse navbar-collapse" id="collapsibleNavId">
     <nav class="nav justify-content-center">
-      <a *ngFor="let item of navItems" class="nav-link" routerLink="/{{item.link}}" routerLinkActive="active">
+      <a *ngFor="let item of navItems" class="nav-link" routerLink="/{{item.link}}" routerLinkActive="active" [ngClass]="{'d-none': !item.users.includes(role)}">
         {{item.name}}
       </a>
     </nav>

@@ -26,6 +26,8 @@ export class AccessGuard implements CanActivate {
     if (user) {
       const role = JSON.parse(user).role;
       const item = navItems.find((item) => item.link === route.url[0].path);
+      console.log(item);
+
       if (item?.users.includes(role)) {
         console.log('has access');
         return true;
