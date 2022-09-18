@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Recommendation } from '../Models/recommendation';
+import { currencyState } from '../Models/currencyState';
+import { Recommendation } from '../Models/Recommendation';
 
 @Injectable({
   providedIn: 'root',
@@ -18,16 +19,25 @@ export class CurrenciesService {
   addRecommendation(recommendation: Recommendation) {
     return this.http.post(this.apiRoute + 'add-recommendation', recommendation);
   }
-  deleteRecommendation() {}
+  deleteRecommendation(id: number) {
+    return this.http.delete(this.apiRoute + 'delete-recommendation/' + id);
+  }
 
   getCurrencyPairs() {}
 
   getCurrencyStates() {
     return this.http.get(this.apiRoute + 'currencystates');
   }
-  changeCurrencyState() {}
+  changeCurrencyState(state: currencyState) {
+    return this.http.post(
+      this.apiRoute + 'add-currencystate/' + state.id,
+      state
+    );
+  }
 
-  getSpreads() {}
+  getSpreads() {
+    return this.http.get(this.apiRoute + 'spreads');
+  }
   changeSpread(details: any) {
     return this.http.post(
       this.apiRoute + 'add-spread/' + details.currencyPair,

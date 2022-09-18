@@ -14,25 +14,35 @@
     <div class="card-body">
       <div class="row mb-2">
         <div class="col-md-3"><span class="order-label">Currency pair: </span>{{ recommendation.currencyPair}}</div>
-        <div class="col-md-9"><span class="order-label">Comment: </span>{{recommendation.comment}}</div>
+        <div class="col-md-7"><span class="order-label">Comment: </span>{{recommendation.comment}}</div>
+        <div class="col-md-2"><button class="btn btn-danger float-right" (click)="removeRecommendation(recommendation.id)" *ngIf="userRole === 'ADMINISTRATOR'">Remove</button></div>
       </div>
     </div>
   </div>
   <div class="row">
     <h2 class="mt-1">Currency states</h2>
-    <span class="mt-2 mr-3 ml-auto ">
-      <input type="text" class="form-control form-control-sm" placeholder="Search forum" [(ngModel)]="searchTerm" (keydown.enter)="search()" />
-    </span>
   </div>
   <!-- Inner main header -->
   <hr>
-
-  <div class="card recommendation-item mb-3" *ngFor="let state of states">
-    <div class="card-body">
-      <div class="row mb-2">
-        <div class="col-md-3"><span class="order-label">Currency: </span>{{ state.currency}}</div>
-        <div class="col-md-9"><span class="order-label">State: </span>{{state.state}}</div>
-      </div>
-    </div>
+  <div class="table-fixed-height">
+    <table class="table table-bordered ">
+      <thead class="thead-inverse">
+        <tr>
+          <th>Currency</th>
+          <th>State</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let state of states">
+          <td scope="row">{{state.currency}}</td>
+          <td class="text-center">
+            <em *ngIf="state.state === 'up'" class="fa fa-arrow-up text-success"></em>
+            <em *ngIf="state.state === 'down'" class="fa fa-arrow-down text-danger"></em>
+            <em *ngIf="state.state === 'stable'" class="fa fa-minus text-warning"></em>
+            <em *ngIf="state.state === 'unknown'" class="fa fa-question text-info"></em>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

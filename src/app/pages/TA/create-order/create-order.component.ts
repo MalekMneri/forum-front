@@ -14,6 +14,7 @@ export class CreateOrderComponent implements OnInit {
   currencyPairs = currencyPairs;
   directionList: string[] = [];
   showError = false;
+  showSuccess = false;
   ngOnInit(): void {}
   changeDirection(event: any) {
     const type = event.target.value;
@@ -38,6 +39,7 @@ export class CreateOrderComponent implements OnInit {
     console.log(form.value);
     this.orderService.create(form.value).subscribe((data) => {
       console.log(data);
+      this.showSuccess = true;
     });
   }
 }

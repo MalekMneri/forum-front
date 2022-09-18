@@ -1,3 +1,4 @@
+import { CurrenciesService } from 'src/app/Services/currencies.service';
 import { Order } from './../../../Models/Order';
 import { OrdersService } from './../../../Services/orders.service';
 import { NgForm } from '@angular/forms';
@@ -9,6 +10,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PendingOrdersComponent implements OnInit {
   searchTerm = '';
+  spreads = [{ spread: 0, currencyPair: '' }];
+  spreadError = false;
   orders = [
     {
       id: 564,
@@ -31,10 +34,20 @@ export class PendingOrdersComponent implements OnInit {
     },
   ];
   showError = false;
-  constructor(private orderService: OrdersService) {}
+  constructor(
+    private orderService: OrdersService,
+    private currencyService: CurrenciesService
+  ) {}
 
   ngOnInit(): void {
     this.getOrders();
+    this.getSpreads();
+  }
+  getSpreads() {
+    this.currencyService.getSpreads().subscribe((data: any) => {
+      console.log(data);
+      this.spreads = data;
+    });
   }
 
   getOrders() {
@@ -54,20 +67,35 @@ export class PendingOrdersComponent implements OnInit {
     });
   }
   calculateLot(order: any, form: NgForm) {
+    //get spread
+    const spread = this.spreads.find(
+      (spread) => spread.currencyPair === order.currencyPair
+    );
+    if (!spread) {
+      this.spreadError = true;
+      return;
+    }
     if (['BUY', 'BUY STOP', 'BUY LIMIT'].includes(order.direction))
       order.lot =
         (form.value.capital * form.value.percentage) /
         100 /
-        (order.price - (order.sl - 20));
+        (order.price - (order.sl - spread.spread));
     else if (['SELL', 'SELL STOP', 'SELL LIMIT'].includes(order.direction))
       order.lot =
         (form.value.capital * form.value.percentage) /
         100 /
-        (order.sl + 20 - order.price);
+        (order.sl + spread.spread - order.price);
 
     order.lot = order.lot.toFixed(2);
   }
   approveOrder(form: NgForm, order: Order) {
+    const spread = this.spreads.find(
+      (spread) => spread.currencyPair === order.currencyPair
+    );
+    if (!spread) {
+      this.spreadError = true;
+      return;
+    }
     if (form.invalid) {
       this.showError = true;
       return;

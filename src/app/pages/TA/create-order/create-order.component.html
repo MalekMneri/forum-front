@@ -80,6 +80,8 @@
     <div class="row">
       <div class="alert alert-danger" role="alert" *ngIf="showError &&orderForm.invalid">invalid form:<br>-all fields should be filled<br>-BUY : SL < Price<br>-SELL: SL > Price
       </div>
+      <div class="alert alert-success" role="alert" *ngIf="showSuccess &&orderForm.valid">Order added!
+      </div>
     </div>
   </form>
 </div>

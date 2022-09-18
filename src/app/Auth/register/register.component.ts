@@ -15,7 +15,6 @@ export class RegisterComponent implements OnInit {
     event.preventDefault();
     if (form.valid && form.value.password === form.value.Cpassword) {
       console.log('valid');
-      form.value.role = 'CLIENT';
       this.auth.register(form.value);
     }
     console.log(form.value);

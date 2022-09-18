@@ -1,11 +1,7 @@
 export const navItems = [
   { link: 'create-order', name: 'New order', users: ['TA', 'ADMINISTRATOR'] },
   { link: 'my-orders', name: 'My Orders', users: ['TA', 'ADMINISTRATOR'] },
-  {
-    link: 'orders',
-    name: 'Orders',
-    users: ['Validator', 'CLIENT', 'ADMINISTRATOR'],
-  },
+  { link: 'orders', name: 'Orders', users: ['VALIDATOR', 'ADMINISTRATOR'] },
   {
     link: 'currencies',
     name: 'Currencies',
@@ -15,6 +11,6 @@ export const navItems = [
   {
     link: 'recommendations',
     name: 'Recommendations',
-    users: ['Validator', 'TA', 'FA', 'CLIENT', 'ADMINISTRATOR'],
+    users: ['VALIDATOR', 'TA', 'FA', 'ADMINISTRATOR'],
   },
 ];

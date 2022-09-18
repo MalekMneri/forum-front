@@ -8,7 +8,7 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="currencyPair">Currency pair</label>
-          <select name="currencyPair" id="currencyPair" class="form-control" ngModel required #conditionDropdown>
+          <select name="currencyPair" id="currencyPair" class="form-control" ngModel required>
             <option *ngFor="let pair of currencyPairs" value="{{pair}}">{{pair}}</option>
           </select>
         </div>
@@ -21,7 +21,19 @@
         </div>
       </div>
     </div>
-    <button class="btn btn-primary float-right" (click)="changeSpread(spreadForm)">Set spread</button>
+    <div class="row">
+      <div class="col-md-10" *ngIf="showSpreadError &&spreadForm.invalid">
+        <div class="alert alert-danger" role="alert">Empty fields
+        </div>
+      </div>
+      <div class="col-md-10" *ngIf="showSpreadSuccess &&spreadForm.valid">
+        <div class="alert alert-success" role="alert">Spread updated!
+        </div>
+      </div>
+      <div class="col-md-2 ml-auto">
+        <button class="btn btn-primary float-right" (click)="changeSpread(spreadForm)">Set spread</button>
+      </div>
+    </div>
   </form>
   <br>
   <br>
@@ -29,8 +41,8 @@
   <h3>Currency states:</h3>
   <br>
   <div class="row">
-    <div class="col-md-5">
-      <table class="table table-bordered">
+    <div class="col-md-5 table-fixed-height">
+      <table class="table table-bordered ">
         <thead class="thead-inverse">
           <tr>
             <th>Currency</th>
@@ -38,13 +50,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td scope="row">Dollar</td>
-            <td>Going up</td>
-          </tr>
-          <tr>
-            <td scope="row">Euro</td>
-            <td>Going down</td>
+          <tr *ngFor="let state of currencyStates">
+            <td scope="row">{{state.currency}}</td>
+            <td class="text-center">
+              <em *ngIf="state.state === 'up'" class="fa fa-arrow-up text-success"></em>
+              <em *ngIf="state.state === 'down'" class="fa fa-arrow-down text-danger"></em>
+              <em *ngIf="state.state === 'stable'" class="fa fa-minus text-warning"></em>
+              <em *ngIf="state.state === 'unknown'" class="fa fa-question text-info"></em>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -52,21 +65,30 @@
     <div class="col-md-7">
       <form #stateForm="ngForm">
         <div class="form-group">
-          <label for="titre">Currency</label>
-          <select name="orderType" id="orderType" class="form-control" ngModel required #conditionDropdown>
+          <label for="currency">Currency</label>
+          <select name="currency" id="currency" class="form-control" ngModel required #conditionDropdown>
             <option *ngFor="let currency of currencies" value="{{currency}}">{{currency}}</option>
           </select>
         </div>
         <div class="form-group">
-          <label for="titre">State</label>
-          <select name="orderType" id="orderType" class="form-control" ngModel required #conditionDropdown>
+          <label for="state">State</label>
+          <select name="state" id="state" class="form-control" ngModel required #conditionDropdown>
             <option value="up">Going up</option>
             <option value="down">Going down</option>
             <option value="stable">Stable</option>
             <option value="unknown">Unknown</option>
           </select>
         </div>
-        <button class="btn btn-primary float-right">Save</button>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="alert alert-success" role="alert" *ngIf="stateForm.valid && showStateSuccess">Currency state set!!
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="stateForm.invalid && showStateError"> empty values !
+            </div>
+          </div>
+          <div class="col-md-4"><button class="btn btn-primary" (click)="setCurrencyState(stateForm)">Set currency state</button></div>
+        </div>
+
       </form>
     </div>
   </div>
@@ -91,6 +113,19 @@
         </div>
       </div>
     </div>
-    <button class="btn btn-primary float-right" (click)="addRecommendation(recommendationForm)">Add recommendation</button>
+    <div class="row">
+      <div class="col-md-9" *ngIf="showRecommendationError && recommendationForm.invalid">
+        <div class="alert alert-danger" role="alert">Empty fields!
+        </div>
+      </div>
+      <div class="col-md-9" *ngIf="showRecommendationSuccess &&recommendationForm.valid">
+        <div class="alert alert-success" role="alert">Recommendation added!
+        </div>
+      </div>
+      <div class="col-md-3 ml-auto">
+        <button class="btn btn-primary float-right" (click)="addRecommendation(recommendationForm)">Add recommendation</button>
+      </div>
+    </div>
+
   </form>
 </div>

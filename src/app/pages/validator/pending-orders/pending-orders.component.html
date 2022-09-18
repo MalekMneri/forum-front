@@ -54,12 +54,16 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <button type="submit" class="btn btn-primary mr-3" *ngIf="order.state === 'pending'" (click)="calculateLot(order,calculateForm)">Calculate</button>
             <span class="order-label">Lot: {{order.lot}}</span>
             <div class="alert alert-danger mt-2" role="alert" *ngIf="showError">fields empty!</div>
           </div>
-          <div class="col-md-6" *ngIf="order.state === 'pending'">
+          <div class="col-md-4">
+            <div class="alert alert-danger" role="alert" *ngIf="spreadError"> spread not set!
+            </div>
+          </div>
+          <div class="col-md-4" *ngIf="order.state === 'pending'">
             <button type="submit" class="btn btn-success float-right ml-2" (click)="approveOrder(calculateForm,order)">Validate Order</button>
             <button type="submit" class="btn btn-danger float-right" (click)="cancelOrder(calculateForm,order)">Cancel Order</button>
           </div>

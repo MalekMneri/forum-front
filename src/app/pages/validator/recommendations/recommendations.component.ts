@@ -8,12 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecommendationsComponent implements OnInit {
   searchTerm = '';
-  recommendations = [{ currencyPair: ' ', comment: '' }];
+  userRole = ' ';
+  recommendations = [{ id: 0, currencyPair: ' ', comment: '' }];
   states = [{ currency: ' ', state: '' }];
   constructor(private currencyService: CurrenciesService) {}
   ngOnInit(): void {
     this.getCurrencyStates();
     this.getRecommendations();
+    this.userRole = JSON.parse(localStorage.getItem('user') || '').role;
   }
   getRecommendations() {
     this.currencyService.getRecommendations().subscribe((data: any) => {
@@ -37,5 +39,11 @@ export class RecommendationsComponent implements OnInit {
       .subscribe((data: any) => {
         this.recommendations = data;
       });
+  }
+  removeRecommendation(id: number) {
+    this.currencyService.deleteRecommendation(id).subscribe((data: any) => {
+      console.log(data);
+      this.getRecommendations();
+    });
   }
 }

@@ -24,14 +24,13 @@ export class HomeGuard implements CanActivate {
     let user = localStorage.getItem('user');
     if (user) {
       const role = JSON.parse(user).role;
-      if (role === 'Validator')
-        return this.router.createUrlTree(['/pending-orders']);
+      if (role === 'VALIDATOR') return this.router.createUrlTree(['/orders']);
       else if (role === 'FA') return this.router.createUrlTree(['/currencies']);
       else if (role === 'TA') return this.router.createUrlTree(['/my-orders']);
       else if (role === 'CLIENT')
         return this.router.createUrlTree(['/create-order']);
       else if (role === 'ADMINISTRATOR')
-        return this.router.createUrlTree(['/pending-orders']);
+        return this.router.createUrlTree(['/orders']);
       else {
         console.log('role not found');
         return this.router.createUrlTree(['/login']);
