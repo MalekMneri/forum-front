@@ -29,8 +29,9 @@ export class CurrenciesService {
     return this.http.get(this.apiRoute + 'currencystates');
   }
   changeCurrencyState(state: currencyState) {
+    console;
     return this.http.post(
-      this.apiRoute + 'add-currencystate/' + state.id,
+      this.apiRoute + 'add-currencystate/' + state.currency,
       state
     );
   }

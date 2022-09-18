@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class RecommendationsComponent implements OnInit {
   searchTerm = '';
   userRole = ' ';
-  recommendations = [{ id: 0, currencyPair: ' ', comment: '' }];
+  recommendations = [{ id: 0, currencyPair: ' ', comment: '', date: '' }];
   states = [{ currency: ' ', state: '' }];
   constructor(private currencyService: CurrenciesService) {}
   ngOnInit(): void {

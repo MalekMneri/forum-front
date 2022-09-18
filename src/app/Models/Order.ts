@@ -1,3 +1,4 @@
+import { User } from './User';
 export class Order {
   id?: number;
   currencyPair?: string;
@@ -11,7 +12,7 @@ export class Order {
   tp?: number;
   lot?: number;
   date?: string;
-  creator?: number;
+  creator?: number | User;
   validator?: number;
   state?: string; // approved, canceled, pending
   capital?: number;

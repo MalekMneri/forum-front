@@ -43,10 +43,12 @@ export class MyOrdersComponent implements OnInit {
       this.getOrders();
       return;
     }
-    this.orderService.searchMyOrders(this.searchTerm).subscribe((data: any) => {
-      console.log(data);
-      this.orders = data;
-    });
+    this.orderService
+      .searchMyOrders(this.searchTerm.toUpperCase())
+      .subscribe((data: any) => {
+        console.log(data);
+        this.orders = data;
+      });
   }
   cancelOrder(id: number) {
     this.orderService.deleteOrder(id).subscribe((data) => {

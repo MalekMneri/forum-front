@@ -10,6 +10,7 @@
       </a>
     </nav>
     <form class="form-inline my-2 ml-auto">
+      <em class="fa fa-crown text-warning mr-2" *ngIf="role=== 'ADMINISTRATOR'"></em>
       <p class="nav-link my-2 my-sm-0 logout-btn" (click)="logout()"><i class="fa fa-user"></i> Log Out</p>
     </form>
   </div>

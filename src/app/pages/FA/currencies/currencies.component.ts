@@ -19,8 +19,16 @@ export class CurrenciesComponent implements OnInit {
   currencyPairs = currencyPairs;
   currencies = currencies;
   currencyStates = [{ id: 0, currency: '', state: ' ' }];
+  spreads = [{ id: 0, currencyPair: '', spread: 0 }];
   ngOnInit(): void {
     this.getCurrencyStates();
+    this.getSpreads();
+  }
+
+  getSpreads() {
+    this.currencyService.getSpreads().subscribe((data: any) => {
+      this.spreads = data;
+    });
   }
   changeSpread(form: NgForm) {
     if (form.invalid) {
@@ -30,6 +38,7 @@ export class CurrenciesComponent implements OnInit {
     this.currencyService.changeSpread(form.value).subscribe((data) => {
       console.log(data);
       this.showSpreadSuccess = true;
+      this.getSpreads();
     });
   }
   getCurrencyStates() {

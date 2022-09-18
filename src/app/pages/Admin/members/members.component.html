@@ -15,6 +15,7 @@
         <th>Name</th>
         <th>Email</th>
         <th>Phone</th>
+        <th>Role</th>
         <th>account</th>
       </tr>
     </thead>
@@ -23,6 +24,7 @@
         <td scope="row">{{user.fullName}}</td>
         <td scope="row">{{user.emailUser}}</td>
         <td scope="row">{{user.phoneNumberUser}}</td>
+        <td scope="row">{{user.role}}</td>
         <td scope="row" *ngIf="!user.verified">
           <p class="activateBtn" (click)="activateUser(user.idUser || 0)">Activate</p>
         </td>

@@ -34,7 +34,7 @@ export class CreateOrderComponent implements OnInit {
     }
     let user = localStorage.getItem('user') || ' ';
     const idCreator = JSON.parse(user).idUser;
-    form.value.creator = idCreator;
+    form.value.creator = { id: idCreator };
     form.value.lot = 0;
     console.log(form.value);
     this.orderService.create(form.value).subscribe((data) => {

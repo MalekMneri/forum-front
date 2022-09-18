@@ -5,15 +5,32 @@
   <br>
   <form #spreadForm="ngForm">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-5 table-fixed-height">
+        <table class="table table-bordered ">
+          <thead class="thead-inverse">
+            <tr>
+              <th>Currency Pair</th>
+              <th>Spread</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let spread of spreads">
+              <td scope="row">{{spread.currencyPair}}</td>
+              <td class="text-center">
+                {{spread.spread}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+      <div class="col-md-7">
         <div class="form-group">
           <label for="currencyPair">Currency pair</label>
           <select name="currencyPair" id="currencyPair" class="form-control" ngModel required>
             <option *ngFor="let pair of currencyPairs" value="{{pair}}">{{pair}}</option>
           </select>
         </div>
-      </div>
-      <div class="col-md-6">
         <div class="form-group">
           <label for="spread">Spread</label>
           <input type="number" name="spread" id="spread" class="form-control" ngModel required placeholder="spread">

@@ -26,11 +26,12 @@ export class PendingOrdersComponent implements OnInit {
       tp: 0,
       lot: 0,
       date: '',
-      creator: 0,
+      creator: { fullName: '' },
       validator: 0,
       state: 'pending',
       capital: 12,
       percentage: 12,
+      spread: 0,
     },
   ];
   showError = false;
@@ -40,8 +41,8 @@ export class PendingOrdersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getOrders();
     this.getSpreads();
+    this.getOrders();
   }
   getSpreads() {
     this.currencyService.getSpreads().subscribe((data: any) => {
@@ -53,7 +54,7 @@ export class PendingOrdersComponent implements OnInit {
   getOrders() {
     this.orderService.getOrders().subscribe((data: any) => {
       this.orders = data;
-      console.log(data);
+      this.orders.forEach((order) => (order.spread = 0));
     });
   }
   search() {
@@ -75,19 +76,27 @@ export class PendingOrdersComponent implements OnInit {
       this.spreadError = true;
       return;
     }
-    if (['BUY', 'BUY STOP', 'BUY LIMIT'].includes(order.direction))
-      order.lot =
-        (form.value.capital * form.value.percentage) /
-        100 /
-        (order.price - (order.sl - spread.spread));
-    else if (['SELL', 'SELL STOP', 'SELL LIMIT'].includes(order.direction))
-      order.lot =
-        (form.value.capital * form.value.percentage) /
-        100 /
-        (order.sl + spread.spread - order.price);
-
+    let numbersAfterComma = this.checkNubmer(order.price);
+    let diff = 0;
+    if (['BUY', 'BUY STOP', 'BUY LIMIT'].includes(order.direction)) {
+      diff = (order.price - order.sl) * 10 ** numbersAfterComma;
+      order.lot = (form.value.capital * form.value.percentage) / 100 / diff;
+    } else if (['SELL', 'SELL STOP', 'SELL LIMIT'].includes(order.direction)) {
+      diff = (order.sl - order.price) * 10 ** numbersAfterComma;
+      order.lot = (form.value.capital * form.value.percentage) / 100 / diff;
+    }
     order.lot = order.lot.toFixed(2);
+    order.spread = spread.spread;
   }
+
+  checkNubmer(num: number): number {
+    const str = num.toString();
+    const arr = str.split('.');
+    console.log(arr);
+
+    return arr[1].length;
+  }
+
   approveOrder(form: NgForm, order: Order) {
     const spread = this.spreads.find(
       (spread) => spread.currencyPair === order.currencyPair
@@ -113,10 +122,6 @@ export class PendingOrdersComponent implements OnInit {
       });
   }
   cancelOrder(form: NgForm, order: Order) {
-    if (form.invalid) {
-      this.showError = true;
-      return;
-    }
     this.calculateLot(order, form);
     const userId = JSON.parse(localStorage.getItem('user') || ' ').idUser;
     form.value.validatior = userId;

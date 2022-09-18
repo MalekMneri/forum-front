@@ -9,7 +9,7 @@
   </div>
   <!-- Inner main header -->
   <hr>
-  <div class="card order-item mb-3" [style.background-color]="order.state === 'pending' ? '#aecfec4a' : (order.state === 'canceled' ? '#f0a9a84a' : '#6aa84f5a' ) " *ngFor="let order of orders">
+  <div class="card order-item mb-3" [style.background-color]="order.state === 'pending' ? 'lightgrey' : (order.state === 'canceled' ? '#f0a9a84a' : '#6aa84f5a' ) " *ngFor="let order of orders">
     <div class="card-body">
       <div class="row mb-2">
         <div class="col-md-4"><span class="order-label">Order number: </span>{{ order.id}}</div>
