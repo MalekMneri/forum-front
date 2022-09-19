@@ -13,7 +13,7 @@ export class CreateOrderComponent implements OnInit {
   showCondition = false;
   currencyPairs = currencyPairs;
   directionList: string[] = [];
-  showError = false;
+  error = { show: false, message: ' ' };
   showSuccess = false;
   ngOnInit(): void {}
   changeDirection(event: any) {
@@ -29,8 +29,17 @@ export class CreateOrderComponent implements OnInit {
 
   createOrder(form: NgForm) {
     if (form.invalid) {
-      this.showError = true;
+      this.error.show = true;
+      this.error.message = 'please fill all required fields!';
       return;
+    }
+    if (!this.checkPriceSlDifference(form)) {
+      form.controls['price'].setErrors({ higher: true });
+      this.error.show = true;
+      this.error.message = 'BUY : SL < Price <br> -SELL: SL > Price';
+      return;
+    } else {
+      form.controls['price'].setErrors(null);
     }
     let user = localStorage.getItem('user') || ' ';
     const idCreator = JSON.parse(user).idUser;
@@ -41,5 +50,12 @@ export class CreateOrderComponent implements OnInit {
       console.log(data);
       this.showSuccess = true;
     });
+  }
+  checkPriceSlDifference(form: NgForm) {
+    //BUY : SL < Price  -SELL: SL > Price
+    if (['BUY', 'BUY STOP', 'BUY LIMIT'].includes(form.value.direction))
+      return form.value.price > form.value.sl;
+    else ['SELL', 'SELL STOP', 'SELL LIMIT'].includes(form.value.direction);
+    return form.value.price < form.value.sl;
   }
 }
